@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.adminMenu')
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Dashboard</div>
 
@@ -14,7 +14,7 @@
                             </div>
                         @endif
 
-                        You 1212 logged in!
+                        Adminka!
                     </div>
                 </div>
             </div>

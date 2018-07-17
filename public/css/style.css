@@ -1,0 +1,20 @@
+#sidebar-wrapper{
+    background-color: #1b1e21;
+    height: 100vh;
+}
+.menu_href{
+    text-decoration:none !important;
+    color: #999999;
+    font-size: 18px;
+}
+.sidebar-nav{
+    margin-top: 20px;
+    list-style: none;
+}
+.menu_href:hover{
+color: white;
+}
+/*state*/
+td a{
+    margin-right: 10px;
+}
