@@ -1,5 +1,4 @@
 <form  action="{{route('placeCrud.store')}}"  method="Post" enctype="multipart/form-data">
-{{ csrf_field() }}
    {{ method_field('Post') }}
     <div class="modal fade " id="createModalPlace" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -15,9 +14,10 @@
                         <label class="control-label col-sm-4" for="title_input">{{$lang->translation}}_Title</label>
                         <div class="col-sm-12">
 
-                            <input type="text" name="translation[{{$lang->id}}]" class="form-control" id="title_input"
-                                   value="">
+                            <input type="text" name="title[{{$lang->id}}]" class="form-control" id="title_input" value="">
+
                         </div>
+
 
                     </div>
 
@@ -48,7 +48,7 @@
                         <select class="form-control" name='stateOption' id="sel1">
 
                             @foreach($states as $state)
-                                <option id="state[{{$state->state_id}}]">{{$state->name}}</option>
+                                <option id="state[{{$state->state_id}}]" value="{{ $state->state_id }}">{{$state->name}}</option>
                             @endforeach
                         </select>
 

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Image;
 use Illuminate\Support\Facades\File;
 
-use App\ImageTypes;
+//use App\ImageTypes;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Storage;
  */
 class AddonLib
 {
-    use ImageTypes;
+//    use ImageTypes;
 
     /**
      * checkUriParameter

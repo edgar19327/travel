@@ -32,8 +32,8 @@ class Image extends Eloquent
 {
 	public $timestamps = false;
     public static $ImageTypeArray = [
-        'main' =>  1,
-        'image' =>  2,
+        'main' =>  0,
+        'image' =>  1,
     ];
 	protected $casts = [
 		'slider_id' => 'int',
@@ -44,7 +44,7 @@ class Image extends Eloquent
 	protected $fillable = [
 		'name',
 		'path',
-		'position',
+		'type',
 		'slider_id',
 		'place_id',
 		'user_id',

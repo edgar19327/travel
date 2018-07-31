@@ -112,7 +112,20 @@
     })
     })
 
-
+    // $('form#createPlaceMod').submit( function (event) {
+    //     event.preventDefault();
+    //
+    //     var formDate = new FormData($(this)[0].files);
+    //     formDate = formDate.fileCollection
+    //
+    //     $.ajax({
+    //         type: 'Post',
+    //         date: formDate,
+    //
+    //         success: function (data) {
+    //         }
+    //     })
+    // })
 
     </script>
 
