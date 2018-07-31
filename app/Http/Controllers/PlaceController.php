@@ -3,12 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Language;
+use App\Models\Place;
+use App\Models\PlaceTranslate;
 use App\Models\SliderTranslate;
 use App\Models\StateTranslate;
 use Illuminate\Http\Request;
-
+use App\AddonLib;
+use Illuminate\Contracts\Validation\Validator;
 class PlaceController extends Controller
 {
+    public $addon;
+
+    public function __construct(Request $request)
+    {
+
+        $this->addon = new AddonLib();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +51,52 @@ class PlaceController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $valid = Validator::make($request->all(), [
+            'translation.*' => 'required',
+        ]);
+        if ($valid->fails()) {
+            return redirect()->back()->withErrors('error', 'Empty Field');
+        } else {
+
+            $query = new Place();
+            $query->status = '1';
+            if ($query->save()) {
+                $state_id = $query->id;
+                $date = $request->translation;
+
+                foreach ($date as $key => $value) {
+                    $transStateCreate = new  PlaceTranslate();
+
+                    $transStateCreate->name = "$value";
+                    $transStateCreate->language_id = "$key";
+                    $transStateCreate->place_id = "$state_id";
+                    $transStateCreate->save();
+
+                }
+
+            }
+        }
+        if ($request->has('image_mane')) {
+            $imageSave = $this->addon->fileUploader($request->file('image'), 'main', true, $query->image_id);
+            if (isset($imageSave['message'])) {
+                return response()->json($imageSave, 400);
+            }
+            $query->image_id = $imageSave;
+        }
+        if ($request->has('image1')) {
+            $imageSave = $this->addon->fileUploader($request->file('image'), 'profile', true, $query->image_id);
+            if (isset($imageSave['message'])) {
+                return response()->json($imageSave, 400);
+            }
+            $query->image_id = $imageSave;
+        }
+        if ($request->has('image2')) {
+            $imageSave = $this->addon->fileUploader($request->file('image'), 'profile', true, $query->image_id);
+            if (isset($imageSave['message'])) {
+                return response()->json($imageSave, 400);
+            }
+            $query->image_id = $imageSave;
+        }
     }
 
     /**

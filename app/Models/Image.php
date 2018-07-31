@@ -31,7 +31,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class Image extends Eloquent
 {
 	public $timestamps = false;
-
+    public static $ImageTypeArray = [
+        'main' =>  1,
+        'image' =>  2,
+    ];
 	protected $casts = [
 		'slider_id' => 'int',
 		'place_id' => 'int',
