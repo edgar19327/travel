@@ -47,4 +47,5 @@ class StateTranslate extends Eloquent
 	{
 		return $this->belongsTo(\App\Models\Language::class);
 	}
+
 }

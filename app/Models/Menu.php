@@ -17,7 +17,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $translate_id
  * @property string $status
  * 
- * @property \App\Models\Language $language
+ * @property \App\Models\Language $languageCrud
  * @property \Illuminate\Database\Eloquent\Collection $menu_parents
  *
  * @package App\Models

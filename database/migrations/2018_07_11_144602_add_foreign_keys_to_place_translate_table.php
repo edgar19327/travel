@@ -15,7 +15,7 @@ class AddForeignKeysToPlaceTranslateTable extends Migration {
 		Schema::table('place_translate', function(Blueprint $table)
 		{
 			$table->foreign('place_id', 'place_translate_ibfk_1')->references('id')->on('place')->onUpdate('RESTRICT')->onDelete('CASCADE');
-			$table->foreign('language_id', 'place_translate_ibfk_2')->references('id')->on('language')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('language_id', 'place_translate_ibfk_2')->references('id')->on('languageCrud')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
 	}
 

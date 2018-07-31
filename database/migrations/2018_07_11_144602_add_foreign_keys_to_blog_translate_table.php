@@ -14,7 +14,7 @@ class AddForeignKeysToBlogTranslateTable extends Migration {
 	{
 		Schema::table('blog_translate', function(Blueprint $table)
 		{
-			$table->foreign('lenguage_id', 'blog_translate_ibfk_1')->references('id')->on('language')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('lenguage_id', 'blog_translate_ibfk_1')->references('id')->on('languageCrud')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 			$table->foreign('blog_id', 'blog_translate_ibfk_2')->references('id')->on('blog')->onUpdate('RESTRICT')->onDelete('CASCADE');
 		});
 	}

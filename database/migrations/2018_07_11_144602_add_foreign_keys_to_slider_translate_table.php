@@ -15,7 +15,7 @@ class AddForeignKeysToSliderTranslateTable extends Migration {
 		Schema::table('slider_translate', function(Blueprint $table)
 		{
 			$table->foreign('slider_id', 'slider_translate_ibfk_1')->references('id')->on('slider')->onUpdate('RESTRICT')->onDelete('CASCADE');
-			$table->foreign('lenguage_id', 'slider_translate_ibfk_2')->references('id')->on('language')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('lenguage_id', 'slider_translate_ibfk_2')->references('id')->on('languageCrud')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
 	}
 

@@ -18,7 +18,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $lenguage_id
  * @property int $blog_id
  * 
- * @property \App\Models\Language $language
+ * @property \App\Models\Language $languageCrud
  * @property \App\Models\Blog $blog
  *
  * @package App\Models

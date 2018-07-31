@@ -14,7 +14,7 @@ class AddForeignKeysToMenuTable extends Migration {
 	{
 		Schema::table('menu', function(Blueprint $table)
 		{
-			$table->foreign('translate_id', 'menu_ibfk_1')->references('id')->on('language')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('translate_id', 'menu_ibfk_1')->references('id')->on('languageCrud')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
 	}
 

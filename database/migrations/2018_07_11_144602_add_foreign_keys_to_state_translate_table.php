@@ -15,7 +15,7 @@ class AddForeignKeysToStateTranslateTable extends Migration {
 		Schema::table('state_translate', function(Blueprint $table)
 		{
 			$table->foreign('state_id', 'state_translate_ibfk_1')->references('id')->on('state')->onUpdate('RESTRICT')->onDelete('CASCADE');
-			$table->foreign('language_id', 'state_translate_ibfk_2')->references('id')->on('language')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('language_id', 'state_translate_ibfk_2')->references('id')->on('languageCrud')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
 	}
 

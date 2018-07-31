@@ -12,7 +12,7 @@ class AddForeignKeysToLanguageTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('language', function(Blueprint $table)
+		Schema::table('languageCrud', function(Blueprint $table)
 		{
 			$table->foreign('image_id', 'language_ibfk_1')->references('id')->on('images')->onUpdate('RESTRICT')->onDelete('CASCADE');
 		});
@@ -26,7 +26,7 @@ class AddForeignKeysToLanguageTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('language', function(Blueprint $table)
+		Schema::table('languageCrud', function(Blueprint $table)
 		{
 			$table->dropForeign('language_ibfk_1');
 		});

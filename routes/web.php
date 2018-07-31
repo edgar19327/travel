@@ -21,4 +21,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('role');
 Route::get('/admin/index', 'AdminController@index')->name('admin_page');
-Route::get('/admin/state', 'StateController@index')->name('state_page');
+Route::resource('/admin/state', 'StateController');
+Route::resource('/admin/languageCrud', 'LanguageController');
+Route::resource('/admin/placeCrud', 'PlaceController');

@@ -19,7 +19,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $language_id
  * 
  * @property \App\Models\Place $place
- * @property \App\Models\Language $language
+ * @property \App\Models\Language $languageCrud
  *
  * @package App\Models
  */

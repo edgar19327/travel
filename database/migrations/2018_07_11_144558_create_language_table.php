@@ -12,7 +12,7 @@ class CreateLanguageTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('language', function(Blueprint $table)
+		Schema::create('languageCrud', function(Blueprint $table)
 		{
 			$table->integer('id', true);
 			$table->string('code');
@@ -29,7 +29,7 @@ class CreateLanguageTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('language');
+		Schema::drop('languageCrud');
 	}
 
 }
