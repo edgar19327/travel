@@ -44,16 +44,15 @@ class AddonLib
 //        return false;
 //    }
 
-    public function file_upload($request, $type_name, $file_delete = false, $id = null)
+    public function file_upload($file, $type_name, $place_id, $file_delete = false, $id = null)
     {
         // request fields
-        $file = $request->file($request);
         $extension = $file->getClientOriginalExtension();
 
         // generate and move files
         $generatedName = $file->getFilename() . time() . '.' . $extension;
 
-        $path = env('UPLOAD_IMAGE_PATH');
+        $path = 'img';
         if (!File::exists(public_path($path))) {
             File::makeDirectory(public_path($path), $mode = 0777, true, true);
         }
@@ -72,11 +71,10 @@ class AddonLib
             $image = new Image();
         }
 
+        $image->place_id = $place_id;
         $image->name = $generatedName;
-        $image->uri = $path . '/' . $generatedName;
-        $image->file_size = filesize($request);
-        $image->status = 1;
-        $image->type = $this->image_types[$type_name];
+        $image->path = $path . '/' . $generatedName;
+        $image->type = $type_name;
         if (!$file->move(public_path($path), $generatedName)) {
             return ['message' => 'File upload error.'];
         }

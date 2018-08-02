@@ -1,4 +1,5 @@
-<form  action="{{route('placeCrud.store')}}"  method="Post" enctype="multipart/form-data">
+<form  action="{{route('placeCrud.store')}}"  method="Post"  enctype="multipart/form-data">
+{{ csrf_field() }}
    {{ method_field('Post') }}
     <div class="modal fade " id="createModalPlace" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -71,7 +72,15 @@
 
 
                     <div class="file-field input-field col s12">
-                        <input type="file" name="images[]" id="images" multiple>
+                        <h6>Main picture
+                        </h6>
+                        <input type="file" name="image_mane" id="image0" >
+                    </div>
+                    <div class="file-field input-field col s12">
+                        <input type="file" name="image1" id="image1"  >
+                    </div>
+                    <div class="file-field input-field col s12">
+                        <input type="file" name="image2" id="image2"  >
                     </div>
                         <div id="images-to-upload"></div>
 

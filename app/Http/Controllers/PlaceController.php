@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use App\Models\Language;
 use App\Models\Place;
 use App\Models\PlaceTranslate;
@@ -10,6 +11,7 @@ use App\Models\StateTranslate;
 use Illuminate\Http\Request;
 use App\AddonLib;
 use Illuminate\Support\Facades\Validator;
+use phpDocumentor\Reflection\DocBlock\Tags\Reference\Reference;
 
 class PlaceController extends Controller
 {
@@ -28,6 +30,9 @@ class PlaceController extends Controller
      */
     public function index()
     {
+$test = PlaceTranslate::with(['place'=>function($test){
+    $test->with('images');
+}])->where('language_id', 3)->get();
         return view('/admin/placeCrud/place');
 
     }
@@ -53,79 +58,55 @@ class PlaceController extends Controller
      */
     public function store(Request $request)
     {
-       // return $request->all();
-$titles = $request->get('title');
-$descriptions = $request->get('description');
-$Place = new Place();
-$Place->state_id=\request()->stateOption;
-$Place->location=\request()->map_link;
-if ($Place->save()){
-    $id = $Place->id;
-    foreach ($titles as $key=>$value){
-        if($value){
-           $placeTranslation = new PlaceTranslate();
-            $placeTranslation->title = $value;
-            $placeTranslation->place_id = $id;
-            $placeTranslation->language_id = $key;
-            $placeTranslation->description = $descriptions[$key];
-            $placeTranslation->save();
+        $valid = Validator::make($request->all(), [
+            'title.*' => 'required',
+            'description.*' => 'required',
+            'map_link' => 'required|unique'
+        ]);
+
+        if ($valid->fails()) {
+            return redirect()->back()->withErrors('error', 'Empty Field');
+        } else {
+            $titles = $request->get('title');
+            $descriptions = $request->get('description');
+            $Place = new Place();
+            $Place->state_id = \request()->stateOption;
+            $Place->location = \request()->map_link;
+            if ($Place->save()) {
+                $id = $Place->id;
+                foreach ($titles as $key => $value) {
+                    if ($value) {
+                        $placeTranslation = new PlaceTranslate();
+                        $placeTranslation->title = $value;
+                        $placeTranslation->place_id = $id;
+                        $placeTranslation->language_id = $key;
+                        $placeTranslation->description = $descriptions[$key];
+                        $placeTranslation->save();
+                    }
+
+                }
+            }
+
+            if ($request->hasFile('image_mane')) {
+                $imageSave = $this->addon->file_upload($request->file('image_mane'), '0', $id);
+                if (isset($imageSave['message'])) {
+                    return response()->json($imageSave, 400);
+                }
+            }
+            if ($request->hasFile('image1')) {
+                $imageSave = $this->addon->file_upload($request->file('image1'), '1', $id);
+                if (isset($imageSave['message'])) {
+                    return response()->json($imageSave, 400);
+                }
+            }
+            if ($request->hasFile('image2')) {
+                $imageSave = $this->addon->file_upload($request->file('image2'), '1', $id);
+                if (isset($imageSave['message'])) {
+                    return response()->json($imageSave, 400);
+                }
+            }
+            return redirect()->back();
         }
-
-    }
-}
-//$request
-//        $valid = Validator::make($request->all(), [
-//        ]);
-//        if ($valid->fails()) {
-//            return redirect()->back()->withErrors('error', 'Empty Field');
-//        } else {
-//        $stateOption = $request->stateOption;
-//        $state = StateTranslate::where('name', $stateOption)->get(['state_id']);
-//        $state_id = $state[0]->state_id;
-//        $query = new Place();
-//        $query->location = $request->map_link;
-//        $query->state_id = $state_id;
-//        if ($query->save()) {
-//            $place_id = $query->id;
-//            $title = $request->title;
-//            $descriptions = $request->description;
-
-//            foreach ($request->get('transletion') as $key => $value) {
-//                foreach ($value as $ke => $ite) {
-//                        $transStateCreate = new  PlaceTranslate();
-//                        $transStateCreate->title =$ite['title'];
-//                        $transStateCreate->description = $ite['description'];
-//                        $transStateCreate->language_id = $ke;
-//                        $transStateCreate->place_id = "$place_id";
-//                        $transStateCreate->save();
-//                }
-//            }
-
-//        }
-//        }
-//        if ($request->has('image_mane')) {
-//            $imageSave = $this->addon->fileUploader($request->file('image'), 'main', true, $query->image_id);
-//            if (isset($imageSave['message'])) {
-//                return response()->json($imageSave, 400);
-//            }
-//            $query->image_id = $imageSave;
-//        }
-//        if ($request->has('image1')) {
-//            $imageSave = $this->addon->fileUploader($request->file('image'), 'profile', true, $query->image_id);
-//            if (isset($imageSave['message'])) {
-//                return response()->json($imageSave, 400);
-//            }
-//            $query->image_id = $imageSave;
-//        }
-//        if ($request->has('image2')) {
-//            $imageSave = $this->addon->fileUploader($request->file('image'), 'profile', true, $query->image_id);
-//            if (isset($imageSave['message'])) {
-//                return response()->json($imageSave, 400);
-//            }
-//            $query->image_id = $imageSave;
-//        }
-//        }
-
     }
 
     /**
