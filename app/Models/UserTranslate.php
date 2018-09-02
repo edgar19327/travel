@@ -35,8 +35,7 @@ class UserTranslate extends Eloquent
 	];
 
 	protected $fillable = [
-		'name',
-		'surname',
+
 		'description',
 		'user_id',
 		'language_id'
@@ -44,7 +43,8 @@ class UserTranslate extends Eloquent
 
 	public function user()
 	{
-		return $this->belongsTo(\App\Models\User::class);
+
+		return $this->belongsTo(\App\User::class);
 	}
 
 	public function language()

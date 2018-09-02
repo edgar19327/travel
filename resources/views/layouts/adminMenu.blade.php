@@ -34,12 +34,17 @@
         .fileinput-upload{
             display: none;
         }
+        .navbar-laravel{
+            background-color: #2a2d30;
+            color: #7d9999;
+        }
+
     </style>
 </head>
 <body>
 <div id="menu">
-    <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-        <div class="container">
+    <nav class="navbar navbar-expand-md   navbar-laravel navbar-inverse">
+        <div class="container-fluid">
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Laravel') }}
             </a>
@@ -49,7 +54,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
 
@@ -106,9 +111,14 @@
                         <a class="menu_href" href="{{ route('placeCrud.index') }}">Place</a>
                     </li>
                     <li>
-                        <a class="menu_href" href="#">About</a>
+                        <a class="menu_href" href="{{ route('sliderCrud.index') }}">Slider</a>
                     </li>
-
+                    <li>
+                        <a class="menu_href" href="{{ route('userControl.index') }}">Users</a>
+                    </li>
+                    <li>
+                        <a class="menu_href" href="{{ route('blogCrud.index') }}">Blogs</a>
+                    </li>
                 </ul>
             </div>
             <main id="page-content-wrapper" class="col-md-10 ">

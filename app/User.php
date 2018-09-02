@@ -36,7 +36,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable
 {
-	protected $casts = [
+    protected $table = 'users';
+
+    protected $casts = [
 		'numbere' => 'int',
 		'role_id' => 'int'
 	];

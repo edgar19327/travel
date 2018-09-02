@@ -46,6 +46,7 @@ class AddonLib
 
     public function file_upload($file, $type_name, $place_id, $file_delete = false, $id = null)
     {
+
         // request fields
         $extension = $file->getClientOriginalExtension();
 
@@ -71,10 +72,28 @@ class AddonLib
             $image = new Image();
         }
 
-        $image->place_id = $place_id;
-        $image->name = $generatedName;
-        $image->path = $path . '/' . $generatedName;
-        $image->type = $type_name;
+        if ($type_name == 2){
+            $image->slider_id = $place_id;
+
+            $image->name = $generatedName;
+            $image->path = $path . '/' . $generatedName;
+
+            $image->type = $type_name;
+
+
+        }else if($type_name == 3){
+            $image->user_id = $place_id;
+            $image->name = $generatedName;
+            $image->path = $path . '/' . $generatedName;
+
+            $image->type = $type_name;
+        }else{
+            $image->place_id = $place_id;
+            $image->name = $generatedName;
+            $image->path = $path . '/' . $generatedName;
+            $image->type = $type_name;
+        }
+
         if (!$file->move(public_path($path), $generatedName)) {
             return ['message' => 'File upload error.'];
         }
@@ -89,7 +108,8 @@ class AddonLib
     {
         $file = $image_data;
         $size = filesize($file);
-        $path = env('UPLOAD_IMAGE_PATH');
+//        $path = env('UPLOAD_IMAGE_PATH');
+        $path = 'img';
         $extension=$file->getClientOriginalExtension();
         $uploadedFile =   time().'.'.$extension;
 
@@ -97,23 +117,19 @@ class AddonLib
         if (!($extension == 'jpeg' || $extension == 'jpg' || $extension == 'png'|| $extension == 'JPEG' || $extension == 'JPG' || $extension == 'PNG')) {
             return ['message' => 'The image must be a file of type: jpeg, jpg, png.'];
         }
-        $size_env = env('SIZE_IMAGE');
-        if ($size >= $size_env) {
-            return ['message' => 'Изображение не может быть больше 10 мегабайт'];
-        }
 
         if (!File::exists(public_path($path))) {
             File::makeDirectory(public_path($path, $mode = 0777, true, true));
         }
         $file->move($destinationPath,  $uploadedFile);
 
-        if ($file_delete && Image::findOrFail($id)->name != 'avatar.png') {
+        if ($file_delete) {
             // find by id movie object
             $image = Image::findOrFail($id);
             // remove files
-            if (file_exists(public_path($image->uri))) {
-                unlink(public_path($image->uri));
-//                dd(public_path($image->uri));
+            if (file_exists(public_path($image->path))) {
+
+                unlink(public_path($image->path));
             }
         } else {
             // create new movie object
@@ -121,9 +137,9 @@ class AddonLib
         }
 
         $image->name = $uploadedFile;
-        $image->uri = $path . '/' . $uploadedFile;
-        $image->file_size = $size;
-        $image->md5 = md5_file(public_path($path . '/' . $uploadedFile));
+        $image->path = $path . '/' . $uploadedFile;
+//        $image->file_size = $size;
+//        $image->md5 = md5_file(public_path($path . '/' . $uploadedFile));
         $image->status = 1;
         $image->type = Image::$ImageTypeArray[$by_type];
 

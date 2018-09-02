@@ -21,7 +21,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $user_id
  * @property string $status
  * 
- * @property \App\Models\Slider $slider
+ * @property \App\Models\Slider $sliderCrud
  * @property \App\Models\Place $place
  * @property \App\Models\User $user
  * @property \Illuminate\Database\Eloquent\Collection $languages
@@ -34,6 +34,8 @@ class Image extends Eloquent
     public static $ImageTypeArray = [
         'main' =>  0,
         'image' =>  1,
+        'slider' => 2,
+        'image_user ' =>3,
     ];
 	protected $casts = [
 		'slider_id' => 'int',

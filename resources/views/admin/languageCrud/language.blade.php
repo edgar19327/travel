@@ -20,7 +20,20 @@
                         </div>
                     </div>
                     <div class="card-body">
+
                         <table class="table table-striped">
+                            @if($errors)
+                                <div class="error_blog">
+
+                                </div>
+                                <div class="row">
+
+                                    @foreach ($errors->all() as $message)
+                                        <div class="col error_div" style="color: red">{{ $message }}</div>
+                                    @endforeach
+                                </div>
+
+                            @endif
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -30,6 +43,7 @@
                             </tr>
                             </thead>
                             <tbody class="state_table">
+
                             @foreach($languages as $lang)
                                 <tr>
                                     <th scope="row" class="id">{{$lang->id}}</th>
@@ -71,6 +85,10 @@
                             </tbody>
                         </table>
 
+                        <div class="col-md-12">
+                            {{$languages->links()}}
+
+                        </div>
                         <!-- Modal -->
 
                     </div>
@@ -86,6 +104,7 @@
             var href = $(this).attr("href");
             $.ajax({
                 type: 'get',
+                async: false,
                 url: href,
                 success: function (data) {
                     $('.card-body').append(data);

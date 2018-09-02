@@ -30,15 +30,19 @@ class BlogTranslate extends Eloquent
 
 	protected $casts = [
 		'lenguage_id' => 'int',
-		'blog_id' => 'int'
-	];
+		'blog_id' => 'int',
+        'place_id' => 'int',
+
+    ];
 
 	protected $fillable = [
 		'title',
 		'description',
 		'lenguage_id',
+        'place_id',
 		'blog_id'
 	];
+
 
 	public function language()
 	{
@@ -49,4 +53,8 @@ class BlogTranslate extends Eloquent
 	{
 		return $this->belongsTo(\App\Models\Blog::class);
 	}
+    public function place()
+    {
+        return $this->belongsTo(\App\Models\Place::class);
+    }
 }

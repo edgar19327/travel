@@ -12,7 +12,7 @@ class CreateSliderTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('slider', function(Blueprint $table)
+		Schema::create('sliderCrud', function(Blueprint $table)
 		{
 			$table->integer('id', true);
 			$table->enum('status', array('0'))->default('0');
@@ -27,7 +27,7 @@ class CreateSliderTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('slider');
+		Schema::drop('sliderCrud');
 	}
 
 }

@@ -23,7 +23,7 @@ class StateController extends Controller
 
         $leng_id = 1;
 
-        $state_id = StateTranslate::with('state')->where('language_id', $leng_id)->get();
+        $state_id = StateTranslate::with('state')->where('language_id', $leng_id)->paginate(5);
 
         return view('/admin/stateCrud/state', ['name' => $state_id]);
 
@@ -48,12 +48,22 @@ class StateController extends Controller
      */
     public function store(Request $request)
     {
+        $massage = [
+
+            'translation.*.required' => 'The Title translate field is required.',
+
+        ];
+
         $valid = Validator::make($request->all(), [
             'translation.*' => 'required',
-        ]);
+        ],$massage);
         if ($valid->fails()) {
-            return redirect()->back()->withErrors('error', 'Empty Field');
-        } else {
+
+            return redirect('/admin/state')
+                ->withInput()
+                ->withErrors($valid);
+//
+            } else {
 
             $query = new State();
             $query->status = '1';
@@ -64,14 +74,16 @@ class StateController extends Controller
                 foreach ($date as $key => $value) {
                     $transStateCreate = new  StateTranslate();
 
-                    $transStateCreate->name = "$value";
-                    $transStateCreate->language_id = "$key";
-                    $transStateCreate->state_id = "$state_id";
+                    $transStateCreate->name = $value;
+                    $transStateCreate->language_id = $key;
+                    $transStateCreate->state_id = $state_id;
                     $transStateCreate->save();
 
                 }
 
             }
+            return redirect()->back();
+
         }
 
 
@@ -114,14 +126,18 @@ class StateController extends Controller
      */
     public function update(Request $request, $id)
     {
-//    StateTranslate::find/
+        $massage = [
+            'translation.*.required' => 'The Title translate field is required.',
+
+        ];
         $validate = Validator::make($request->all(), [
             'id' => 'required',
             'translation.*' => 'required',
-        ]);
+        ], $massage);
         if ($validate->fails()) {
-            dd(json_encode($validate));
-
+            return redirect('/admin/state')
+                ->withInput()
+                ->withErrors($validate);
         } else {
             $translations = $request->translation;
             foreach ($translations as $kay => $value) {
@@ -133,7 +149,7 @@ class StateController extends Controller
                 $stateUpdate->save();
 
             }
-            return view('admin.index');
+            return redirect()->back();
 
         }
     }
@@ -155,7 +171,7 @@ class StateController extends Controller
             $stateTranslate = StateTranslate::where('state_id', $id);
             if ($stateTranslate->delete()) {
                 State::destroy($id);
-                return redirect('/admin/index');
+                return redirect()->back();
 
             }
         }

@@ -46,10 +46,7 @@ class Place extends Eloquent
 		return $this->belongsTo(\App\Models\State::class);
 	}
 
-	public function blogs()
-	{
-		return $this->hasMany(\App\Models\Blog::class);
-	}
+
 
 	public function images()
 	{
@@ -65,4 +62,5 @@ class Place extends Eloquent
 	{
 		return $this->hasMany(\App\Models\RatingPlace::class);
 	}
+
 }

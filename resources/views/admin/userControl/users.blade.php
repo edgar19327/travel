@@ -7,14 +7,12 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
-                            <div class="col-md-10">State
-
+                            <div class="col-md-10"> Users
 
                             </div>
                             <div class="col-md-2">
-
-                                <a href="{{ route('state.create')}}" class="create"
-                                   data-toggle="modal" data-target="#createModal"><i class="fa fa-plus "></i>
+                                <a href="{{ route('userControl.create')}}" class="createUsericon "
+                                   data-toggle="modal" data-target="#createModalUser"><i class="fa fa-plus "></i>
                                 </a>
 
                             </div>
@@ -22,46 +20,55 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        @if($errors)
+                            <div class="error_blog">
+
+                            </div>
+                            <div class="row">
+
+                                @foreach ($errors->all() as $message)
+                                    <div class="col error_div" style="color: red">{{ $message }}</div>
+                                @endforeach
+                            </div>
+
+                        @endif
                         <table class="table table-striped">
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Title</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Surname</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Role</th>
                                 <th scope="col"></th>
                             </tr>
                             </thead>
                             <tbody class="state_table">
-                            @if($errors)
-                                <div class="error_blog">
-
-                                </div>
-                                <div class="row">
-
-                                    @foreach ($errors->all() as $message)
-                                        <div class="col error_div" style="color: red">{{ $message }}</div>
-                                    @endforeach
-                                </div>
-
-                            @endif
-                            @foreach($name as $sate)
+                            @foreach($users as $user)
                                 <tr>
-                                    <th scope="row" class="id">{{$sate->state->id}}</th>
-                                    <td>{{$sate->name}}</td>
+
+                                    <th scope="row" class="id">{{$user->id}}</th>
+                                    <td>{{$user->name}}</td>
+                                    <td>{{$user->surname}}</td>
+                                    <td>{{$user->email}}</td>
+                                    <td>{{$user->role->name}}</td>
                                     <td class="text-center">
-                                        <div class="col-md-3 float-right">
+                                        <div class="col-md-12 float-right">
                                             <div class="row">
 
                                                 <div class="col-md-4"><a
-                                                            href="{{ route('state.show',$sate->state->id) }}"
-                                                            class="view" data-toggle="modal" data-target="#viewModal"><i
-                                                                class="far fa-eye"></i></a></div>
+                                                            href="{{ route('userControl.show',$user->id) }}"
+                                                            class="viewUser" data-toggle="modal"
+                                                            data-target="#viewUserModal"><i class="far fa-eye"></i></a>
+                                                </div>
                                                 <div class="col-md-4"><a
-                                                            href="{{ route('state.edit',$sate->state->id) }}"
-                                                            class="edit" data-toggle="modal" data-target="#editModal"><i
+                                                            href="{{ route('userControl.edit',$user->id) }}"
+                                                            class="editUser" data-toggle="modal"
+                                                            data-target="#editModalUser"><i
                                                                 class="fas fa-pencil-alt text-success"></i></a></div>
                                                 <div class="col-md-4">
-                                                    <form id="delete-form-{{ $sate->state->id }}" method="post"
-                                                          action="{{ route('state.destroy',$sate->state->id) }}">
+                                                    <form id="delete-form-{{$user->id }}" method="post"
+                                                          action="{{ route('userControl.destroy',$user->id) }}">
                                                         {{ csrf_field() }}
                                                         {{ method_field('DELETE') }}
 
@@ -69,7 +76,7 @@
                                                                 if(confirm('Are you sure, You Want to delete this?'))
                                                                 {
                                                                 event.preventDefault();
-                                                                document.getElementById('delete-form-{{ $sate->state->id}}').submit();
+                                                                document.getElementById('delete-form-{{$user->id}}').submit();
                                                                 }
                                                                 else{
                                                                 event.preventDefault();
@@ -78,22 +85,20 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                     </td>
-
-
                                 </tr>
                             @endforeach
+
+
                             </tbody>
                         </table>
+                            <div class="col-md-12">
+                                {{$users->links()}}
 
+                            </div>
                         <!-- Modal -->
-                        <div class="col-md-12">
-                            {{$name->links()}}
-
-                        </div>
-
                     </div>
-
                 </div>
             </div>
         </div>
@@ -104,84 +109,55 @@
     <script type="text/javascript">
 
 
-        $('.view').on('click', function () {
+        $('.viewUser').on('click', function () {
             var href = $(this).attr("href");
             $.ajax({
                 type: 'get',
                 url: href,
                 success: function (data) {
                     $('.card-body').append(data);
-                    $('#myModal').modal('show');
+                    $('#userViewsModal').modal('show');
 
 
                 }
             })
         });
-        $('.edit').on('click', function () {
+
+        $('.editUser').on('click', function () {
             var href = $(this).attr("href");
             $.ajax({
                 type: 'get',
                 url: href,
                 success: function (data) {
                     $('.card-body').append(data);
-                    $('#editModal').modal('show');
+                    $('#editModalUser').modal('show');
 
 
                 }
             })
         });
 
-        $('form#edit').submit(function (event) {
-            event.preventDefault();
-            var formDate = new FormData($(this)[0]);
+        {{--$('form#edit').submit( function (event) {--}}
+        {{--event.preventDefault();--}}
+        {{--var formDate = new FormData($(this)[0]);--}}
 
+        $('.createUsericon').on('click', function () {
+            var href = $(this).attr("href");
             $.ajax({
-                type: 'PUT',
-                date: formDate,
+                type: 'get',
+                async: false,
+                url: href,
                 success: function (data) {
+                    $('.card-body').append(data);
 
 
-                    alert(data);
                 },
-                error: function () {
-                    alert(2333)
-                }
+
+
             })
         });
 
-        $('.create').on('click', function () {
-            var href = $(this).attr("href");
-            $.ajax({
-                type: 'get',
-                url: href,
-                success: function (data) {
-                    $('.card-body').append(data);
-                    $('#createModal').modal('show');
 
-
-                }
-            })
-
-
-        })
-
-        $('form#create').submit(function (event) {
-            event.preventDefault();
-            var formDate = new FormData($(this)[0]);
-
-            $.ajax({
-                type: 'Post',
-                date: formDate,
-                success: function (data) {
-
-
-                    alert(data);
-                },
-                error: function () {
-                    alert(2333)
-                }
-            })
-        });
     </script>
 
 @endsection

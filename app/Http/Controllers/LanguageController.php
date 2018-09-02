@@ -15,7 +15,7 @@ class LanguageController extends Controller
      */
     public function index()
     {
-        $languages = Language::all();
+        $languages = Language::paginate(5);
 
         return view('/admin/languageCrud/language', ['languages' => $languages]);
     }
@@ -43,8 +43,9 @@ class LanguageController extends Controller
             'translationLang' => 'required',
         ]);
         if ($validator->fails()) {
-            return 333;
-
+            return redirect('/admin/languageCrud')
+                ->withInput()
+                ->withErrors($validator);
         } else {
             $language = new  Language();
             $language->code = "$request->codeLang";
@@ -89,14 +90,21 @@ class LanguageController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $massage = [
+            'lang_code.required' => 'The Language Code  field is required.',
+            'lang_translation.required' => 'The Language Translation   field is required.',
+
+        ];
         $val = Validator::make($request->all(), [
             'lang_code' => 'required|min:1|max:5',
             'lang_translation' => 'required'
-        ]);
+        ], $massage);
 
         if ($val->fails()) {
-            return redirect()->back();
-        } else {
+            return redirect('/admin/languageCrud')
+                ->withInput()
+                ->withErrors($val);
+        }else {
 
             $updateLang = Language::where('id', $id)->get();
             $updateLang = $updateLang->first();

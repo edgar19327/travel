@@ -18,7 +18,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $slider_id
  * @property int $lenguage_id
  * 
- * @property \App\Models\Slider $slider
+ * @property \App\Models\Slider $sliderCrud
  * @property \App\Models\Language $languageCrud
  *
  * @package App\Models

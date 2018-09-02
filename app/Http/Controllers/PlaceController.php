@@ -6,12 +6,17 @@ use App\Models\Image;
 use App\Models\Language;
 use App\Models\Place;
 use App\Models\PlaceTranslate;
+use App\Models\RatingPlace;
 use App\Models\SliderTranslate;
+use App\Models\State;
 use App\Models\StateTranslate;
+use http\Env\Response;
+use Illuminate\Queue\Failed;
 use Illuminate\Http\Request;
 use App\AddonLib;
 use Illuminate\Support\Facades\Validator;
 use phpDocumentor\Reflection\DocBlock\Tags\Reference\Reference;
+use Illuminate\Support\Facades\DB;
 
 class PlaceController extends Controller
 {
@@ -30,10 +35,8 @@ class PlaceController extends Controller
      */
     public function index()
     {
-$test = PlaceTranslate::with(['place'=>function($test){
-    $test->with('images');
-}])->where('language_id', 3)->get();
-        return view('/admin/placeCrud/place');
+        $placeAll = PlaceTranslate::with('place')->where('language_id', 1)->paginate(10);
+        return view('/admin/placeCrud/place', ['placeAll' => $placeAll]);
 
     }
 
@@ -58,14 +61,28 @@ $test = PlaceTranslate::with(['place'=>function($test){
      */
     public function store(Request $request)
     {
+   $massage = [
+       'title.*.required'=>'The Title translation field is required.',
+       'description.*.required'=>'The Description translation Link field is required.',
+       'map_link.required'=>'The Map Link field is required.',
+       'image_mane.required'=>'The main Image field is required.',
+       'image1.required'=>'The Image Secondary field is required.',
+       'image2.required'=>'The Image Secondary field is required.',
+
+   ];
         $valid = Validator::make($request->all(), [
             'title.*' => 'required',
             'description.*' => 'required',
-            'map_link' => 'required|unique'
-        ]);
+            'map_link' => 'required',
+            'image_mane' => 'required',
+            'image1' => 'required',
+            'image2' => 'required'
+        ],$massage);
 
         if ($valid->fails()) {
-            return redirect()->back()->withErrors('error', 'Empty Field');
+            return redirect('/admin/placeCrud')
+                ->withInput()
+                ->withErrors($valid);
         } else {
             $titles = $request->get('title');
             $descriptions = $request->get('description');
@@ -117,7 +134,25 @@ $test = PlaceTranslate::with(['place'=>function($test){
      */
     public function show($id)
     {
-        //
+
+        $place = Place::with([
+            'place_translates' => function ($leng) {
+                $leng->with('language');
+            },
+            'images',
+            'state' => function ($t) {
+                $t->with(['state_translates' => function ($state) {
+                    $state->where('language_id', 1);
+                }]);
+            },
+            'rating_places' => function ($query) {
+                $query->select('place_id', DB::raw('SUM(rating) as total_sales'))->groupBy('place_id');
+            }
+        ])->where('id', $id)->get();
+        $test = RatingPlace::where('place_id', $id)->avg('rating');
+        return view('/admin/placeCrud/placeViewsModal', ['place' => $place, 'ret' => $test]);
+        return \response()->json(['place' => $place, 'ret' => $test], 200);
+
     }
 
     /**
@@ -128,7 +163,22 @@ $test = PlaceTranslate::with(['place'=>function($test){
      */
     public function edit($id)
     {
-        //
+
+
+        $stats = State::with(['state_translates' => function ($stateTrans) {
+            $stateTrans->where('language_id', 1);
+        }])->get();
+
+        $place = Place::with([
+            'place_translates' => function ($leng) {
+                $leng->with('language');
+            },
+            'images',
+
+
+        ])->where('id', $id)->get();
+        return view('/admin/placeCrud/placeEdit', ['place' => $place, 'stats' => $stats]);
+
     }
 
     /**
@@ -140,7 +190,71 @@ $test = PlaceTranslate::with(['place'=>function($test){
      */
     public function update(Request $request, $id)
     {
-        //
+        $massage = [
+            'title.*.required'=>'The Title translation field is required.',
+            'description.*.required'=>'The Description translation Link field is required.',
+            'map_link.required'=>'The Map Link field is required.',
+            'image_mane.required'=>'The main Image field is required.',
+            'image1.required' =>'The Secondary  Image  field is required.',
+            'image2.required'=>'The Secondary  Image  field is required.',
+
+
+        ];
+        $validate = Validator::make($request->all(), [
+            'title.*' => 'required',
+            'description.*' => 'required',
+            'map_link' => 'required',
+            'image_mane' => 'required',
+            'image1' => 'required',
+            'image2' => 'required',
+        ],$massage);
+        if ($validate->fails()) {
+                return redirect('/admin/placeCrud')
+                    ->withInput()
+                    ->withErrors($validate);
+        } else {
+            $titles = $request->get('title');
+            $descriptions = $request->get('description');
+            $mapLink = $request->get('map_link');
+            $state_id = $request->get('stateOption');
+            $place = Place::where('id', $id)->first();
+            $place->location = "$mapLink";
+            $place->state_id = "$state_id";
+
+            $place->save();
+
+            foreach ($titles as $key => $value) {
+                $placeTranslate = PlaceTranslate::where('place_id', $id)->where('language_id', $key)->first();
+                $placeTranslate->title = $value;
+                $placeTranslate->description = $descriptions[$key];
+
+                $placeTranslate->save();
+            }
+
+            if ($request->hasFile('image_0')) {
+                foreach ($request->file('image_0') as $img_id => $file) {
+                    $imageSave = $this->addon->fileUploader($file, 'main', true, $img_id);
+                    if (isset($imageSave['message'])) {
+                        return response()->json($imageSave, 400);
+                    }
+                }
+            }
+
+            if ($request->hasFile('image_1')) {
+                foreach ($request->file('image_1') as $img_id => $file) {
+                    $imageSave = $this->addon->fileUploader($file, 'image', true, $img_id);
+                    if (isset($imageSave['message'])) {
+                        return response()->json($imageSave, 400);
+                    }
+                }
+
+            }
+
+        }
+
+        return redirect()->back();
+
+
     }
 
     /**
@@ -151,6 +265,14 @@ $test = PlaceTranslate::with(['place'=>function($test){
      */
     public function destroy($id)
     {
-        //
+        $imgPath = Image::select('path')->where('place_id', $id)->get();
+
+        foreach ($imgPath as $key => $value) {
+            @unlink($value->path);
+
+        }
+//
+        Place::destroy($id);
+        return redirect()->back();
     }
 }

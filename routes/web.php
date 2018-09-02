@@ -24,3 +24,6 @@ Route::get('/admin/index', 'AdminController@index')->name('admin_page');
 Route::resource('/admin/state', 'StateController');
 Route::resource('/admin/languageCrud', 'LanguageController');
 Route::resource('/admin/placeCrud', 'PlaceController');
+Route::resource('/admin/sliderCrud', 'SliderController');
+Route::resource('/admin/userControl', 'UsersController');
+Route::resource('/admin/blogCrud', 'BlogController');

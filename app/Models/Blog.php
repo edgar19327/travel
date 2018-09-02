@@ -26,20 +26,12 @@ class Blog extends Eloquent
 	protected $table = 'blog';
 	public $timestamps = false;
 
-	protected $casts = [
-		'price' => 'int',
-		'place_id' => 'int'
-	];
+
 
 	protected $fillable = [
-		'price',
-		'place_id'
 	];
 
-	public function place()
-	{
-		return $this->belongsTo(\App\Models\Place::class);
-	}
+
 
 	public function blog_translates()
 	{
