@@ -26,16 +26,29 @@ class MenuParent extends Eloquent
 	public $timestamps = false;
 
 	protected $casts = [
-		'parent_id' => 'int'
+		'parent_id' => 'int',
+		'translate_id' => 'int',
+        'menu_id' => 'int'
 	];
 
 	protected $fillable = [
 		'parent_id',
-		'childe_name'
+        'translate_id',
+        'name',
+        'url',
+        'menu_id'
 	];
 
 	public function menu()
 	{
 		return $this->belongsTo(\App\Models\Menu::class, 'parent_id');
 	}
+
+    public function language()
+    {
+        return $this->belongsTo(\App\Models\Language::class, 'translate_id');
+    }
+
+
+
 }

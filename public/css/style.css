@@ -24,7 +24,9 @@ td a{
 .navbar-brand{
     color: white;
 }
-
+.navbar-brand:hover {
+    color: white;
+}
 /*hover adminka*/
 
 

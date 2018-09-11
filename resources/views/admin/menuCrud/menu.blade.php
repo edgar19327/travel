@@ -7,14 +7,12 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
-                            <div class="col-md-10">State
-
+                            <div class="col-md-10">Menu
 
                             </div>
                             <div class="col-md-2 text-right">
-
-                                <a href="{{ route('state.create')}}" class="create"
-                                   data-toggle="modal" data-target="#createModal"><i class="fa fa-plus "></i>
+                                <a href="{{ route('menuCrud.create')}}" class="createMenu"
+                                   data-toggle="modal" data-target="#createMenuModal"><i class="fa fa-plus "></i>
                                 </a>
 
                             </div>
@@ -22,15 +20,8 @@
                         </div>
                     </div>
                     <div class="card-body">
+
                         <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Title</th>
-                                <th scope="col"></th>
-                            </tr>
-                            </thead>
-                            <tbody class="state_table">
                             @if($errors)
                                 <div class="error_blog">
 
@@ -43,25 +34,45 @@
                                 </div>
 
                             @endif
-                            @foreach($name as $sate)
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Parent Name</th>
+                                <th scope="col"></th>
+                            </tr>
+                            </thead>
+                            <tbody class="state_table">
+                            @foreach($menu as $item)
                                 <tr>
-                                    <th scope="row" class="id">{{$sate->state->id}}</th>
-                                    <td>{{$sate->name}}</td>
+                                    <th scope="row" class="id">{{$item->id}}</th>
+                                    <td>{{$item->menu_parents[0]->name}}</td>
+
+                                    @if(empty($menu[0]['menu_parents'][0]['menu']['menu_parents'][0]['name']))
+
+                                        <td>{{$item['menu_parents'][0]['menu']['menu_parents'][0]['name']}}</td>
+                                    @else
+                                        <td></td>
+                                    @endif
+
                                     <td class="text-center">
-                                        <div class="col-md-3 float-right">
+                                        <div class="col-md-4 float-right">
+
                                             <div class="row">
 
                                                 <div class="col-md-4"><a
-                                                            href="{{ route('state.show',$sate->state->id) }}"
-                                                            class="view" data-toggle="modal" data-target="#viewModal"><i
-                                                                class="far fa-eye"></i></a></div>
+                                                            href="{{ route('menuCrud.show',$item->id) }}"
+                                                            class="viewMenu" data-toggle="modal"
+                                                            data-target="#viewMenuModal"><i class="far fa-eye"></i></a>
+                                                </div>
                                                 <div class="col-md-4"><a
-                                                            href="{{ route('state.edit',$sate->state->id) }}"
-                                                            class="edit" data-toggle="modal" data-target="#editModal"><i
+                                                            href="{{ route('menuCrud.edit',$item->id) }}"
+                                                            class="editMenu" data-toggle="modal"
+                                                            data-target="#editMenuModal"><i
                                                                 class="fas fa-pencil-alt text-success"></i></a></div>
                                                 <div class="col-md-4">
-                                                    <form id="delete-form-{{ $sate->state->id }}" method="post"
-                                                          action="{{ route('state.destroy',$sate->state->id) }}">
+                                                    <form id="delete-form-{{ $item->id }}" method="post"
+                                                          action="{{ route('menuCrud.destroy',$item->id) }}">
                                                         {{ csrf_field() }}
                                                         {{ method_field('DELETE') }}
 
@@ -69,7 +80,7 @@
                                                                 if(confirm('Are you sure, You Want to delete this?'))
                                                                 {
                                                                 event.preventDefault();
-                                                                document.getElementById('delete-form-{{ $sate->state->id}}').submit();
+                                                                document.getElementById('delete-form-{{ $item->id}}').submit();
                                                                 }
                                                                 else{
                                                                 event.preventDefault();
@@ -83,17 +94,17 @@
 
                                 </tr>
                             @endforeach
+
                             </tbody>
                         </table>
 
-                        <!-- Modal -->
-                        <div class="col-md-12">
-                            {{$name->links()}}
+                    {{--<div class="col-md-12">--}}
+                    {{--{{$languages->links()}}--}}
 
-                        </div>
+                    {{--</div>--}}
+                    <!-- Modal -->
 
                     </div>
-
                 </div>
             </div>
         </div>
@@ -102,61 +113,64 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 
     <script type="text/javascript">
-
-
-        $('.view').on('click', function () {
+        $('.viewMenu').on('click', function () {
             var href = $(this).attr("href");
             $.ajax({
                 type: 'get',
+                async: false,
                 url: href,
                 success: function (data) {
                     $('.card-body').append(data);
-                    $('#myModal').modal('show');
-
-
-                }
-            })
-        });
-        $('.edit').on('click', function () {
-            var href = $(this).attr("href");
-            $.ajax({
-                type: 'get',
-                url: href,
-                success: function (data) {
-                    $('.card-body').append(data);
-                    $('#editModal').modal('show');
+                    $('#viewMenuModal').modal('show');
 
 
                 }
             })
         });
 
-        $('form#edit').submit(function (event) {
-            event.preventDefault();
-            var formDate = new FormData($(this)[0]);
-
-            $.ajax({
-                type: 'PUT',
-                date: formDate,
-                success: function (data) {
 
 
-                    alert(data);
-                },
-                error: function () {
-                    alert(2333)
-                }
-            })
-        });
-
-        $('.create').on('click', function () {
+        $('.editMenu').on('click', function () {
             var href = $(this).attr("href");
             $.ajax({
                 type: 'get',
                 url: href,
                 success: function (data) {
                     $('.card-body').append(data);
-                    $('#createModal').modal('show');
+                    $('#editMenuModal').modal('show');
+
+
+                }
+            })
+        });
+
+        //
+        // $('form#editLang').submit( function (event) {
+        //     event.preventDefault();
+        //     var formDate = new FormData($(this)[0]);
+        //
+        //     $.ajax({
+        //         type:'PUT',
+        //         date:formDate,
+        //         success: function (data) {
+        //
+        //
+        //
+        //             alert(data);
+        //         },
+        //         error:function () {
+        //             alert("Error")
+        //         }
+        //     })
+        // });
+        $('.createMenu').on('click', function () {
+            var href = $(this).attr("href");
+            $.ajax({
+                type: 'get',
+                url: href,
+                success: function (data) {
+                    $('.card-body').append(data);
+                    $('#createMenuModal').modal('show');
 
 
                 }
@@ -165,23 +179,24 @@
 
         })
 
-        $('form#create').submit(function (event) {
-            event.preventDefault();
-            var formDate = new FormData($(this)[0]);
-
-            $.ajax({
-                type: 'Post',
-                date: formDate,
-                success: function (data) {
-
-
-                    alert(data);
-                },
-                error: function () {
-                    alert(2333)
-                }
-            })
-        });
+        // $('form#create').submit( function (event) {
+        // event.preventDefault();
+        // var formDate = new FormData($(this)[0]);
+        //
+        // $.ajax({
+        // type:'Post',
+        // date:formDate,
+        // success: function (data) {
+        //
+        //
+        //
+        // alert(data);
+        // },
+        // error:function () {
+        // alert(2333)
+        // }
+        // })
+        // });
     </script>
 
 @endsection

@@ -10,8 +10,8 @@
                             <div class="col-md-10">Blog
 
                             </div>
-                            <div class="col-md-2">
-                                <a href="{{ route('blogCrud.create')}}" class=" createBlog "
+                            <div class="col-md-2 text-right">
+                                <a href="{{ route('blogCrud.create')}}" class="createBlog "
                                    data-toggle="modal" data-target="#createModalBlog"><i class="fa fa-plus "></i>
                                 </a>
 

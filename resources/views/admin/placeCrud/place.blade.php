@@ -10,7 +10,7 @@
                             <div class="col-md-10">Place
 
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2 text-right">
                                 <a href="{{ route('placeCrud.create')}}" class="createPlace "
                                    data-toggle="modal" data-target="#createModalPlace"><i class="fa fa-plus "></i>
                                 </a>

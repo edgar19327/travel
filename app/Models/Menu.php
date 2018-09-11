@@ -28,22 +28,18 @@ class Menu extends Eloquent
 	public $timestamps = false;
 
 	protected $casts = [
-		'translate_id' => 'int'
 	];
 
 	protected $fillable = [
 		'name',
-		'translate_id',
 		'status'
 	];
 
-	public function language()
-	{
-		return $this->belongsTo(\App\Models\Language::class, 'translate_id');
-	}
+
 
 	public function menu_parents()
 	{
-		return $this->hasMany(\App\Models\MenuParent::class, 'parent_id');
+		return $this->hasMany(\App\Models\MenuParent::class, 'menu_id');
 	}
+
 }

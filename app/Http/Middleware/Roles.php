@@ -7,6 +7,7 @@ use App\Models\Role;
 use App\Models\RolePermission;
 use Closure;
 use Illuminate\Routing\Route;
+use  App\User;
 use  Illuminate\Support\Facades\Auth;
 
 class Roles
@@ -20,13 +21,17 @@ class Roles
      */
     public function handle($request, Closure $next)
     {
+
 //
-//        $user_rol =Auth::user()->role_id;
-//if ($user_rol == 3 ){
-//    return redirect('/welcome');
-//}else{
-    return $next($request);
-//}
+        $user_rol =User::where('id', Auth::id())->with('role')->get();
+
+if (Auth::check() && $user_rol[0]->role->name == "admin" ){
+        return $next($request);
+
+}else{
+        return redirect('/');
+
+}
 //getController
 //        dd($request->route()->getActionMethod());
 //        dd($user_rol);

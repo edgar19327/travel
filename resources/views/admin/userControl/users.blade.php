@@ -10,7 +10,7 @@
                             <div class="col-md-10"> Users
 
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2 text-right">
                                 <a href="{{ route('userControl.create')}}" class="createUsericon "
                                    data-toggle="modal" data-target="#createModalUser"><i class="fa fa-plus "></i>
                                 </a>

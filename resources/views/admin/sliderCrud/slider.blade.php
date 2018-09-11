@@ -10,7 +10,7 @@
                             <div class="col-md-10" >
                                 Slider
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2 text-right">
                                 <a href="{{ route('sliderCrud.create')}}" class="createSlider "
                                    data-toggle="modal" data-target="#createModalPlace"><i class="fa fa-plus "></i>
                                 </a>
@@ -20,19 +20,20 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        @if($errors)
+                        <div class="error_blog">
+
+                        </div>
                         <div class="row">
-                            @if($errors)
-                                <div class="error_blog">
 
-                                </div>
-                                <div class="row">
+                        @foreach ($errors->all() as $message)
+                        <div class="col error_div" style="color: red">{{ $message }}</div>
+                        @endforeach
+                        </div>
 
-                                    @foreach ($errors->all() as $message)
-                                        <div class="col error_div" style="color: red">{{ $message }}</div>
-                                    @endforeach
-                                </div>
+                        @endif
+                        <div class="row">
 
-                            @endif
 
                         @foreach($slider as $slid)
                                 <div class="col-md-3">
@@ -40,7 +41,6 @@
                                         <div class="caption">
                                             <div class="col-md-12 slider_icone">
                                                 <div class="row">
-{{----}}
                                                     <div class="col-md-6 text-right">
                                                         <a href="{{ route('sliderCrud.show',$slid->id) }}"
                                                            class="view" data-toggle="modal"
@@ -51,7 +51,7 @@
                                                               action="{{ route('sliderCrud.destroy',$slid->id) }}">
                                                             {{ csrf_field() }}
                                                             {{ method_field('DELETE') }}
-{{----}}
+
                                                             <a href="" onclick="
                                                                     if(confirm('Are you sure, You Want to delete this?'))
                                                                     {
@@ -69,8 +69,13 @@
 
 
                                         </div>
-                                        <img src="/{{$slid->images[0]->path}}" style="width: 100%; height: 200px" alt="...">
+
+                                            <img src="/{{$slid->images[0]->path}}" style="width: 100%; height: 200px" alt="...">
+
+
                                     </div>
+
+
                                 </div>
                             @endforeach
 

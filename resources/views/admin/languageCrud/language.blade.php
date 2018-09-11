@@ -10,7 +10,7 @@
                             <div class="col-md-10">Languages
 
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2 text-right">
                                 <a href="{{ route('languageCrud.create')}}" class="createLang"
                                    data-toggle="modal" data-target="#createLangModal"><i class="fa fa-plus "></i>
                                 </a>

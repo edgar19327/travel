@@ -35,7 +35,7 @@
             display: none;
         }
         .navbar-laravel{
-            background-color: #2a2d30;
+            background-color:#1b1e21;
             color: #7d9999;
         }
 
@@ -118,6 +118,9 @@
                     </li>
                     <li>
                         <a class="menu_href" href="{{ route('blogCrud.index') }}">Blogs</a>
+                    </li>
+                    <li>
+                        <a class="menu_href" href="{{ route('menuCrud.index') }}">Menu</a>
                     </li>
                 </ul>
             </div>
