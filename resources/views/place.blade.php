@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('content')
     <header>
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <div id="myCarousel" class="carousel slide placeView" data-ride="carousel">
 
 
             <!-- Wrapper for slides -->
-            <div class="carousel-inner">
+            <div class="carousel-inner ">
                 <div class="item carouseltem active" id="carouseltem">
                     <img src="img/php4943.tmp1534841378.jpeg" alt="Los Angeles" style="width:100%; height: 100vh;">
                 </div>
@@ -44,7 +44,7 @@
                 <span class="fa fa-star"></span>
                 <span class="fa fa-star"></span>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 place_desc">
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                     when an unknown printer took a galley of type and scrambled it to make a type specimen book.

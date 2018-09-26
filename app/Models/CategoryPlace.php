@@ -10,38 +10,35 @@ namespace App\Models;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class RatingPlace
+ * Class CategoryPlace
  * 
  * @property int $id
- * @property int $rating
- * @property int $users_id
+ * @property int $category_id
  * @property int $place_id
  * 
- * @property \App\Models\User $user
+ * @property \App\Models\Category $category
  * @property \App\Models\Place $place
  *
  * @package App\Models
  */
-class RatingPlace extends Eloquent
+class CategoryPlace extends Eloquent
 {
-	protected $table = 'rating_place';
+	protected $table = 'category_place';
 	public $timestamps = false;
 
 	protected $casts = [
-		'rating' => 'int',
-		'users_id' => 'int',
+		'category_id' => 'int',
 		'place_id' => 'int'
 	];
 
 	protected $fillable = [
-		'rating',
-		'users_id',
+		'category_id',
 		'place_id'
 	];
 
-	public function user()
+	public function category()
 	{
-		return $this->belongsTo(\App\Models\User::class, 'users_id');
+		return $this->belongsTo(\App\Models\Category::class);
 	}
 
 	public function place()

@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return view('test');
 });
+Route::post('/language', 'MultiLanguage@language')->name('language');
 
 Auth::routes();
 
@@ -30,5 +31,6 @@ Route::group(['middleware' => ['role']], function () {
     Route::resource('/admin/userControl', 'UsersController');
     Route::resource('/admin/blogCrud', 'BlogController');
     Route::resource('/admin/menuCrud', 'MenuController');
+    Route::resource('/admin/categoryCrud', 'CategoryController');
 });
 

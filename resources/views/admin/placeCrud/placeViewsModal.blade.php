@@ -38,6 +38,11 @@
                         <input type="text" name="state_id" class="form-control" id="id_show" disabled=""
                                value="{{$place[0]->state->state_translates[0]->name}}">
                 </div>
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <input type="text" name="category" class="form-control" id="category" disabled=""
+                    value="{{$categoryPLace[0]->category->category_translates[0]->name}}">
+                </div>
 
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="id">Location:</label>

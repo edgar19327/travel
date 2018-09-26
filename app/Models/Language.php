@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 11 Jul 2018 15:04:55 +0000.
+ * Date: Mon, 24 Sep 2018 09:54:44 +0000.
  */
 
 namespace App\Models;
@@ -15,11 +15,11 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $id
  * @property string $code
  * @property string $translation
- * @property int $image_id
+ * @property int $status
  * 
- * @property \App\Models\Image $image
  * @property \Illuminate\Database\Eloquent\Collection $blog_translates
- * @property \Illuminate\Database\Eloquent\Collection $menus
+ * @property \Illuminate\Database\Eloquent\Collection $category_translates
+ * @property \Illuminate\Database\Eloquent\Collection $menu_parents
  * @property \Illuminate\Database\Eloquent\Collection $place_translates
  * @property \Illuminate\Database\Eloquent\Collection $slider_translates
  * @property \Illuminate\Database\Eloquent\Collection $state_translates
@@ -33,28 +33,28 @@ class Language extends Eloquent
 	public $timestamps = false;
 
 	protected $casts = [
-		'image_id' => 'int'
+		'status' => 'int'
 	];
 
 	protected $fillable = [
 		'code',
 		'translation',
-		'image_id'
+		'status'
 	];
-
-	public function image()
-	{
-		return $this->belongsTo(\App\Models\Image::class);
-	}
 
 	public function blog_translates()
 	{
 		return $this->hasMany(\App\Models\BlogTranslate::class, 'lenguage_id');
 	}
 
-	public function menus()
+	public function category_translates()
 	{
-		return $this->hasMany(\App\Models\Menu::class, 'translate_id');
+		return $this->hasMany(\App\Models\CategoryTranslate::class, 'translate_id');
+	}
+
+	public function menu_parents()
+	{
+		return $this->hasMany(\App\Models\MenuParent::class, 'translate_id');
 	}
 
 	public function place_translates()

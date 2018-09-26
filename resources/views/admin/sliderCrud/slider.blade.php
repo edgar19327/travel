@@ -69,7 +69,6 @@
 
 
                                         </div>
-
                                             <img src="/{{$slid->images[0]->path}}" style="width: 100%; height: 200px" alt="...">
 
 

@@ -8,7 +8,6 @@
                     <h4 class="modal-title">Create </h4>
                 </div>
                 <div class="modal-body">
-
                     @foreach($language as $lang)
 
                         <div class="form-group">
@@ -33,9 +32,8 @@
 
                     @endforeach
                     <hr>
-                    <div class="col-sm-12">
                         <div class="form-group">
-                            <label for="sel1">Select list:</label>
+                            <label for="sel1">State list:</label>
                             <select class="form-control" name='stateOption' id="sel1">
 
                                 @foreach($states as $state)
@@ -45,16 +43,25 @@
                             </select>
 
                         </div>
-                    </div>
+
+                        <div class="form-group">
+                            <label for="sel1">Select Category:</label>
+                            <select class="form-control" name='catOption' id="sel1">
+                                @foreach($category as $cat)
+                                    <option id="category[{{$cat->id}}]"
+                                            value="{{ $cat->id }}">{{$cat->category_translates[0]->name}}</option>
+                                @endforeach
+                            </select>
+
+                        </div>
+
 
 
                     <div class="form-group">
                         <label class="control-label col-sm-4" for="map_input">Map Link</label>
-                        <div class="col-sm-12">
 
                             <input type="text" name="map_link" class="form-control"
                                    id="map_input" value="">
-                        </div>
 
 
                     </div>

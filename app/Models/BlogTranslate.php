@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 11 Jul 2018 15:04:55 +0000.
+ * Date: Mon, 24 Sep 2018 09:54:44 +0000.
  */
 
 namespace App\Models;
@@ -17,9 +17,11 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $description
  * @property int $lenguage_id
  * @property int $blog_id
+ * @property int $place_id
  * 
- * @property \App\Models\Language $languageCrud
+ * @property \App\Models\Language $language
  * @property \App\Models\Blog $blog
+ * @property \App\Models\Place $place
  *
  * @package App\Models
  */
@@ -31,18 +33,16 @@ class BlogTranslate extends Eloquent
 	protected $casts = [
 		'lenguage_id' => 'int',
 		'blog_id' => 'int',
-        'place_id' => 'int',
-
-    ];
+		'place_id' => 'int'
+	];
 
 	protected $fillable = [
 		'title',
 		'description',
 		'lenguage_id',
-        'place_id',
-		'blog_id'
+		'blog_id',
+		'place_id'
 	];
-
 
 	public function language()
 	{
@@ -53,8 +53,9 @@ class BlogTranslate extends Eloquent
 	{
 		return $this->belongsTo(\App\Models\Blog::class);
 	}
-    public function place()
-    {
-        return $this->belongsTo(\App\Models\Place::class);
-    }
+
+	public function place()
+	{
+		return $this->belongsTo(\App\Models\Place::class);
+	}
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+
 use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Image;
@@ -62,17 +63,17 @@ class AddonLib
             // find by id movie object
             $image = Image::findOrFail($id);
             // remove files
-            if($image->id != 1){
-            if (file_exists(public_path($image->uri))) {
-                unlink(public_path($image->uri));
-              }
+            if ($image->id != 1) {
+                if (file_exists(public_path($image->uri))) {
+                    unlink(public_path($image->uri));
+                }
             }
         } else {
             // create new movie object
             $image = new Image();
         }
 
-        if ($type_name == 2){
+        if ($type_name == 2) {
             $image->slider_id = $place_id;
 
             $image->name = $generatedName;
@@ -81,13 +82,13 @@ class AddonLib
             $image->type = $type_name;
 
 
-        }else if($type_name == 3){
+        } else if ($type_name == 3) {
             $image->user_id = $place_id;
             $image->name = $generatedName;
             $image->path = $path . '/' . $generatedName;
 
             $image->type = $type_name;
-        }else{
+        } else {
             $image->place_id = $place_id;
             $image->name = $generatedName;
             $image->path = $path . '/' . $generatedName;
@@ -104,46 +105,42 @@ class AddonLib
         return $image->id;
     }
 
+    const ImageTypeArray = [
+        "main" => 0,
+        "image" => 1,
+    ];
+
     public function fileUploader($image_data, $by_type, $file_delete = false, $id = null)
     {
         $file = $image_data;
         $size = filesize($file);
-//        $path = env('UPLOAD_IMAGE_PATH');
         $path = 'img';
-        $extension=$file->getClientOriginalExtension();
-        $uploadedFile =   time().'.'.$extension;
+        $extension = $file->getClientOriginalExtension();
+        $uploadedFile = time(). rand(1111111, 999999999) . '.' . $extension;
 
-        $destinationPath=public_path($path);
-        if (!($extension == 'jpeg' || $extension == 'jpg' || $extension == 'png'|| $extension == 'JPEG' || $extension == 'JPG' || $extension == 'PNG')) {
-            return ['message' => 'The image must be a file of type: jpeg, jpg, png.'];
-        }
+        $destinationPath = public_path($path);
 
         if (!File::exists(public_path($path))) {
             File::makeDirectory(public_path($path, $mode = 0777, true, true));
         }
-        $file->move($destinationPath,  $uploadedFile);
+        $file->move($destinationPath, $uploadedFile);
 
         if ($file_delete) {
-            // find by id movie object
-            $image = Image::findOrFail($id);
-            // remove files
-            if (file_exists(public_path($image->path))) {
-
-                unlink(public_path($image->path));
+            $image = Image::where('id', $id);
+            if ($image->exists()) {
+                $image = $image->first();
+                if (file_exists(public_path($image->path))) {
+                    unlink(public_path($image->path));
+                }
+            } else {
+                $image = new Image();
             }
         } else {
-            // create new movie object
             $image = new Image();
         }
-
         $image->name = $uploadedFile;
         $image->path = $path . '/' . $uploadedFile;
-//        $image->file_size = $size;
-//        $image->md5 = md5_file(public_path($path . '/' . $uploadedFile));
         $image->status = 1;
-        $image->type = Image::$ImageTypeArray[$by_type];
-
-        // save movie object
         if (!$image->save()) {
             return ['message' => 'Error saved images.'];
         }
@@ -157,21 +154,19 @@ class AddonLib
     }
 
 
-
-
-    public function qr_qode($qr_code,$file_delete = false, $id = null)
+    public function qr_qode($qr_code, $file_delete = false, $id = null)
     {
 
         $file = QRCode::text($qr_code)->png();
-        $extension=$file->getClientOriginalExtension();
-        $uploadedFile =   time().'.'.$extension;
+        $extension = $file->getClientOriginalExtension();
+        $uploadedFile = time() . '.' . $extension;
 
         $path = env('UPLOAD_QR_PATH');
-        $destinationPath=public_path($path);
+        $destinationPath = public_path($path);
         if (!File::exists(public_path($path))) {
             File::makeDirectory(public_path($path, $mode = 0777, true, true));
         }
-        $file->move($destinationPath,  $uploadedFile);
+        $file->move($destinationPath, $uploadedFile);
 
         if ($file_delete) {
             // find by id movie object
@@ -190,7 +185,7 @@ class AddonLib
         $qr->uri = $path . '/' . $uploadedFile;
         $qr->md5 = md5_file(public_path($path . '/' . $uploadedFile));
         $qr->status = 1;
-        $qr->user_id=Auth::user()->id;
+        $qr->user_id = Auth::user()->id;
         // save movie object
         if (!$qr->save()) {
             return ['message' => 'Error saved images.'];

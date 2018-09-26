@@ -122,6 +122,9 @@
                     <li>
                         <a class="menu_href" href="{{ route('menuCrud.index') }}">Menu</a>
                     </li>
+                    <li>
+                        <a class="menu_href" href="{{ route('categoryCrud.index') }}">Category</a>
+                    </li>
                 </ul>
             </div>
             <main id="page-content-wrapper" class="col-md-10 ">

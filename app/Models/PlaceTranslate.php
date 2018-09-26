@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 11 Jul 2018 15:04:55 +0000.
+ * Date: Mon, 24 Sep 2018 09:54:44 +0000.
  */
 
 namespace App\Models;
@@ -19,7 +19,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $language_id
  * 
  * @property \App\Models\Place $place
- * @property \App\Models\Language $languageCrud
+ * @property \App\Models\Language $language
  *
  * @package App\Models
  */

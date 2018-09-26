@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\CategoryPlace;
 use App\Models\Image;
 use App\Models\Language;
 use App\Models\Place;
@@ -48,8 +50,11 @@ class PlaceController extends Controller
     public function create()
     {
         $language = Language::all();
+        $category = Category::with(['category_translates' => function ($date) {
+            $date->where('translate_id', 1);
+        }])->get();
         $states = StateTranslate::where('language_id', 1)->get();
-        return view('/admin/placeCrud/placeCreateModal', ['language' => $language, 'states' => $states]);
+        return view('/admin/placeCrud/placeCreateModal', ['language' => $language, 'states' => $states, 'category' => $category]);
 
     }
 
@@ -61,15 +66,15 @@ class PlaceController extends Controller
      */
     public function store(Request $request)
     {
-   $massage = [
-       'title.*.required'=>'The Title translation field is required.',
-       'description.*.required'=>'The Description translation Link field is required.',
-       'map_link.required'=>'The Map Link field is required.',
-       'image_mane.required'=>'The main Image field is required.',
-       'image1.required'=>'The Image Secondary field is required.',
-       'image2.required'=>'The Image Secondary field is required.',
+        $massage = [
+            'title.*.required' => 'The Title translation field is required.',
+            'description.*.required' => 'The Description translation Link field is required.',
+            'map_link.required' => 'The Map Link field is required.',
+            'image_mane.required' => 'The main Image field is required.',
+            'image1.required' => 'The Image Secondary field is required.',
+            'image2.required' => 'The Image Secondary field is required.',
 
-   ];
+        ];
         $valid = Validator::make($request->all(), [
             'title.*' => 'required',
             'description.*' => 'required',
@@ -77,7 +82,7 @@ class PlaceController extends Controller
             'image_mane' => 'required',
             'image1' => 'required',
             'image2' => 'required'
-        ],$massage);
+        ], $massage);
 
         if ($valid->fails()) {
             return redirect('/admin/placeCrud')
@@ -101,7 +106,12 @@ class PlaceController extends Controller
                         $placeTranslation->save();
                     }
 
+
                 }
+                $category_place = new CategoryPlace;
+                $category_place->category_id = $request->catOption;
+                $category_place->place_id = $id;
+                $category_place->save();
             }
 
             if ($request->hasFile('image_mane')) {
@@ -149,8 +159,13 @@ class PlaceController extends Controller
                 $query->select('place_id', DB::raw('SUM(rating) as total_sales'))->groupBy('place_id');
             }
         ])->where('id', $id)->get();
+        $categoryPLace = CategoryPlace::with(['category' => function($data){
+            $data->with(['category_translates' => function($cat){
+                $cat->where('translate_id',1);
+            }]);
+        }])->get();
         $test = RatingPlace::where('place_id', $id)->avg('rating');
-        return view('/admin/placeCrud/placeViewsModal', ['place' => $place, 'ret' => $test]);
+        return view('/admin/placeCrud/placeViewsModal', ['place' => $place, 'ret' => $test, 'categoryPLace' => $categoryPLace]);
         return \response()->json(['place' => $place, 'ret' => $test], 200);
 
     }
@@ -163,7 +178,9 @@ class PlaceController extends Controller
      */
     public function edit($id)
     {
-
+        $category = Category::with(['category_translates' => function ($date) {
+            $date->where('translate_id', 1);
+        }])->get();
 
         $stats = State::with(['state_translates' => function ($stateTrans) {
             $stateTrans->where('language_id', 1);
@@ -177,7 +194,7 @@ class PlaceController extends Controller
 
 
         ])->where('id', $id)->get();
-        return view('/admin/placeCrud/placeEdit', ['place' => $place, 'stats' => $stats]);
+        return view('/admin/placeCrud/placeEdit', ['place' => $place, 'stats' => $stats, 'category' => $category]);
 
     }
 
@@ -190,13 +207,14 @@ class PlaceController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $massage = [
-            'title.*.required'=>'The Title translation field is required.',
-            'description.*.required'=>'The Description translation Link field is required.',
-            'map_link.required'=>'The Map Link field is required.',
-            'image_mane.required'=>'The main Image field is required.',
-            'image1.required' =>'The Secondary  Image  field is required.',
-            'image2.required'=>'The Secondary  Image  field is required.',
+            'title.*.required' => 'The Title translation field is required.',
+            'description.*.required' => 'The Description translation Link field is required.',
+            'map_link.required' => 'The Map Link field is required.',
+//            'image_mane.required' => 'The main Image field is required.',
+//            'image1.required' => 'The Secondary  Image  field is required.',
+//            'image2.required' => 'The Secondary  Image  field is required.',
 
 
         ];
@@ -204,14 +222,14 @@ class PlaceController extends Controller
             'title.*' => 'required',
             'description.*' => 'required',
             'map_link' => 'required',
-            'image_mane' => 'required',
-            'image1' => 'required',
-            'image2' => 'required',
-        ],$massage);
+//            'image_mane' => 'required',
+//            'image1' => 'required',
+//            'image2' => 'required',
+        ], $massage);
         if ($validate->fails()) {
-                return redirect('/admin/placeCrud')
-                    ->withInput()
-                    ->withErrors($validate);
+            return redirect('/admin/placeCrud')
+                ->withInput()
+                ->withErrors($validate);
         } else {
             $titles = $request->get('title');
             $descriptions = $request->get('description');
@@ -230,6 +248,9 @@ class PlaceController extends Controller
 
                 $placeTranslate->save();
             }
+            $editCategoryPlace = CategoryPlace::where('place_id', $id)->first();
+            $editCategoryPlace->category_id = $request->catOption;
+            $editCategoryPlace->save();
 
             if ($request->hasFile('image_0')) {
                 foreach ($request->file('image_0') as $img_id => $file) {
@@ -247,9 +268,7 @@ class PlaceController extends Controller
                         return response()->json($imageSave, 400);
                     }
                 }
-
             }
-
         }
 
         return redirect()->back();

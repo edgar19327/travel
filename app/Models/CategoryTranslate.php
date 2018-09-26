@@ -10,42 +10,37 @@ namespace App\Models;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class MenuParent
+ * Class CategoryTranslate
  * 
  * @property int $id
  * @property string $name
- * @property string $url
- * @property int $parent_id
+ * @property int $category_id
  * @property int $translate_id
- * @property int $menu_id
  * 
- * @property \App\Models\Menu $menu
+ * @property \App\Models\Category $category
  * @property \App\Models\Language $language
  *
  * @package App\Models
  */
-class MenuParent extends Eloquent
+class CategoryTranslate extends Eloquent
 {
-	protected $table = 'menu_parent';
+	protected $table = 'category_translate';
 	public $timestamps = false;
 
 	protected $casts = [
-		'parent_id' => 'int',
-		'translate_id' => 'int',
-		'menu_id' => 'int'
+		'category_id' => 'int',
+		'translate_id' => 'int'
 	];
 
 	protected $fillable = [
 		'name',
-		'url',
-		'parent_id',
-		'translate_id',
-		'menu_id'
+		'category_id',
+		'translate_id'
 	];
 
-	public function menu()
+	public function category()
 	{
-		return $this->belongsTo(\App\Models\Menu::class);
+		return $this->belongsTo(\App\Models\Category::class);
 	}
 
 	public function language()

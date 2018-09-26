@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 11 Jul 2018 15:04:55 +0000.
+ * Date: Mon, 24 Sep 2018 09:54:44 +0000.
  */
 
 namespace App\Models;
@@ -15,10 +15,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $id
  * @property string $location
  * @property int $state_id
- * @property int $price
  * 
  * @property \App\Models\State $state
- * @property \Illuminate\Database\Eloquent\Collection $blogs
+ * @property \Illuminate\Database\Eloquent\Collection $blog_translates
+ * @property \Illuminate\Database\Eloquent\Collection $categories
  * @property \Illuminate\Database\Eloquent\Collection $images
  * @property \Illuminate\Database\Eloquent\Collection $place_translates
  * @property \Illuminate\Database\Eloquent\Collection $rating_places
@@ -31,14 +31,12 @@ class Place extends Eloquent
 	public $timestamps = false;
 
 	protected $casts = [
-		'state_id' => 'int',
-		'price' => 'int'
+		'state_id' => 'int'
 	];
 
 	protected $fillable = [
 		'location',
-		'state_id',
-		'price'
+		'state_id'
 	];
 
 	public function state()
@@ -46,7 +44,16 @@ class Place extends Eloquent
 		return $this->belongsTo(\App\Models\State::class);
 	}
 
+	public function blog_translates()
+	{
+		return $this->hasMany(\App\Models\BlogTranslate::class);
+	}
 
+	public function categories()
+	{
+		return $this->belongsToMany(\App\Models\Category::class)
+					->withPivot('id');
+	}
 
 	public function images()
 	{
@@ -62,5 +69,4 @@ class Place extends Eloquent
 	{
 		return $this->hasMany(\App\Models\RatingPlace::class);
 	}
-
 }
