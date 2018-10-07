@@ -88,6 +88,16 @@ class AddonLib
             $image->path = $path . '/' . $generatedName;
 
             $image->type = $type_name;
+        } else if ($type_name === 4) {
+//            about
+//            dd(44);
+//
+            $image->about_id = $place_id;
+
+            $image->name = $generatedName;
+            $image->path = $path . '/' . $generatedName;
+
+            $image->type = $type_name;
         } else {
             $image->place_id = $place_id;
             $image->name = $generatedName;
@@ -116,7 +126,7 @@ class AddonLib
         $size = filesize($file);
         $path = 'img';
         $extension = $file->getClientOriginalExtension();
-        $uploadedFile = time(). rand(1111111, 999999999) . '.' . $extension;
+        $uploadedFile = time() . rand(1111111, 999999999) . '.' . $extension;
 
         $destinationPath = public_path($path);
 

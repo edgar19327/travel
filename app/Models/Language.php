@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Mon, 24 Sep 2018 09:54:44 +0000.
+ * Date: Sun, 30 Sep 2018 23:17:18 +0000.
  */
 
 namespace App\Models;
@@ -17,7 +17,9 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $translation
  * @property int $status
  * 
+ * @property \Illuminate\Database\Eloquent\Collection $about_translates
  * @property \Illuminate\Database\Eloquent\Collection $blog_translates
+ * @property \Illuminate\Database\Eloquent\Collection $buttone_translates
  * @property \Illuminate\Database\Eloquent\Collection $category_translates
  * @property \Illuminate\Database\Eloquent\Collection $menu_parents
  * @property \Illuminate\Database\Eloquent\Collection $place_translates
@@ -42,9 +44,19 @@ class Language extends Eloquent
 		'status'
 	];
 
+	public function about_translates()
+	{
+		return $this->hasMany(\App\Models\AboutTranslate::class);
+	}
+
 	public function blog_translates()
 	{
 		return $this->hasMany(\App\Models\BlogTranslate::class, 'lenguage_id');
+	}
+
+	public function buttone_translates()
+	{
+		return $this->hasMany(\App\Models\ButtoneTranslate::class);
 	}
 
 	public function category_translates()

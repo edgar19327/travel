@@ -37,7 +37,7 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        $placeAll = PlaceTranslate::with('place')->where('language_id', 1)->paginate(10);
+        $placeAll = PlaceTranslate::with('place')->where('language_id', 1)->paginate(5);
         return view('/admin/placeCrud/place', ['placeAll' => $placeAll]);
 
     }
@@ -212,9 +212,9 @@ class PlaceController extends Controller
             'title.*.required' => 'The Title translation field is required.',
             'description.*.required' => 'The Description translation Link field is required.',
             'map_link.required' => 'The Map Link field is required.',
-//            'image_mane.required' => 'The main Image field is required.',
-//            'image1.required' => 'The Secondary  Image  field is required.',
-//            'image2.required' => 'The Secondary  Image  field is required.',
+            'image_mane.required' => 'The main Image field is required.',
+            'image1.required' => 'The Secondary  Image  field is required.',
+            'image2.required' => 'The Secondary  Image  field is required.',
 
 
         ];
@@ -222,9 +222,9 @@ class PlaceController extends Controller
             'title.*' => 'required',
             'description.*' => 'required',
             'map_link' => 'required',
-//            'image_mane' => 'required',
-//            'image1' => 'required',
-//            'image2' => 'required',
+            'image_mane' => 'required',
+            'image1' => 'required',
+            'image2' => 'required',
         ], $massage);
         if ($validate->fails()) {
             return redirect('/admin/placeCrud')

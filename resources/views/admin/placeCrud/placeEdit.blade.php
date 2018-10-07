@@ -100,6 +100,7 @@
                         </div>
 
                         <div class="row center-block">
+                            {{$place[0]->images}}
                             @foreach($place[0]->images as $imageAll)
                                 <input type="file" class="col-md-4 center-block"
                                        name="image_{{$imageAll->type}}[{{$imageAll->id}}]"

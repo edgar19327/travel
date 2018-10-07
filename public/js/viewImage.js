@@ -104,3 +104,30 @@ console.log(fileCollection4);
     });
 
 });
+
+
+
+window.fileCollection5 = new Array();
+$('#image_about').on('change', function (e) {
+    var files = e.target.files;
+    $('#image_upload_about').empty();
+
+    $.each(files, function (i, file) {
+
+
+        fileCollection5.push(file);
+
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function (e){
+
+            var template =
+
+                '<img  style="width: 100%; height: 200px " src="' + e.target.result + '"> '
+
+            $('#image_upload_about').append(template);
+        };
+
+    });
+
+});

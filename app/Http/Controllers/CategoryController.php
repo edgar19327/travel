@@ -8,6 +8,7 @@ use App\Models\CategoryTranslate;
 use App\Models\Language;
 use function foo\func;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
@@ -137,8 +138,13 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+$place = CategoryPlace::where('category_id',$id)->get();
+//return $place;
+if(sizeof($place) >= 1){
+    return Redirect::back()->withErrors(['No Permission']);
+}else{
+    $category= Category::destroy($id);
+    return redirect()->back();}
 
-        $categoryPlace = Category::destroy($id);
-        return redirect()->back();
     }
 }

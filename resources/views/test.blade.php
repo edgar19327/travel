@@ -52,18 +52,14 @@
 
         <div class="about-section">
             <div class="container">
-
                 <div class="about-inner-section">
                     <div class="col-md-6  col-sm-6 about-right">
-                        <img src="/images/fullsizeoutput_ef3.jpeg" alt=" ">
+                        <img src="/{{$about->about->images[0]->path}}
+                                " alt=" ">
                     </div>
                     <div class="col-md-6 col-sm-6 about-inner-column">
-                        <h4>About Us </h4>
-                        <p>Takenpossession of lorem Ipsum is simply dummy text of the printing and typesetting
-                            industry In sit amet sapien eros Integer in tincidunt labore et dolore magna aliqua
-                            remaining essentially unchanged. It was popularised in the 1960s with the release of
-                            Letraset
-                            sheets containing Lorem Ipsum passages.</p>
+                        <h4>{{$about->title}}</h4>
+                        <p>{{$about->description}}</p>
 
                     </div>
 
@@ -72,598 +68,87 @@
             </div>
         </div>
     </section>
+    <!--    --><?php //echo '<pre>'; print_r($categoryPlace); ?>
 
-    <section class="place-category">
-
-        <div class="container">
-            <div class="row place-category-header text-center">
-
-                <h3>Category Name</h3>
-
-            </div>
-        </div>
-
-        <div class="place-body">
+    @foreach($categoryArray as $key => $value )
+        <section class="category{{$key}}">
 
             <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div id="CarouselPlace" class="carousel slide">
+                <div class="row place-category-header text-center">
 
+                    <h3>{{$key}} </h3>
 
-                            <!-- Carousel items -->
-                            <div class="carousel-inner carousel-place">
-
-                                <div class="item active">
-                                    <div class="row">
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                    </div><!--.row-->
-                                </div><!--.item-->
-
-                                <div class="item">
-                                    <div class="row">
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                    </div><!--.row-->
-                                </div><!--.item-->
-
-                                <div class="item">
-                                    <div class="row">
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                    </div><!--.row-->
-                                </div><!--.item-->
-
-                            </div><!--.carousel-inner-->
-                            <a data-slide="prev" href="#CarouselPlace"
-                               class="left carousel-control carouselCategory"></a>
-                            <a data-slide="next" href="#CarouselPlace"
-                               class="right carousel-control carouselCategory"></a>
-                        </div><!--.Carousel-->
-
-                    </div>
                 </div>
-            </div><!--.container-->
-        </div>
-    </section>
-
-    <section class="place-category">
-
-        <div class="container">
-            <div class="row place-category-header text-center">
-
-                <h3>Category Name1</h3>
-
             </div>
-        </div>
-
-        <div class="place-body">
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div id="CarouselPlaceCategory" class="carousel slide">
+            <div class="place-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="Carousel{{$key}}" class="carousel slide">
 
 
-                            <!-- Carousel items -->
-                            <div class="carousel-inner carousel-place">
+                                <!-- Carousel items -->
+                                <div class="carousel-inner carousel-{{$key}}">
 
-                                <div class="item active">
-                                    <div class="row">
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                    </div><!--.row-->
-                                </div><!--.item-->
+                                    @foreach($value as $placeInfo)
+                                        @if($loop->iteration ==1 )
 
-                                <div class="item">
-                                    <div class="row">
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                    </div><!--.row-->
-                                </div><!--.item-->
+                                        <div class="item @if($loop->iteration == 1)active @endif">
+                                            <div class="row">
+                                        @endif
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                                    <figure class="imghvr-shutter-in-out-diag-2">
+                                                        <img src="/{{$placeInfo->images[0]->path}}"
+                                                             class="img-responsive">
+                                                        <figcaption>
+                                                            <h3>{{$placeInfo->place_translates[0]->title}}
+                                                            </h3>
+                                                            <div class="btn-group">
+                                                                <button type="button" class="btn btn-info">View</button>
+                                                            </div>
+                                                        </figcaption>
+                                                    </figure>
 
-                                <div class="item">
-                                    <div class="row">
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
+                                                </div>
+                                            @if($loop->iteration %4==0 )
+                                            </div>
                                         </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                    </div><!--.row-->
-                                </div><!--.item-->
 
-                            </div><!--.carousel-inner-->
-                            <a data-slide="prev" href="#CarouselPlaceCategory"
-                               class="left carousel-control carouselCategory"></a>
-                            <a data-slide="next" href="#CarouselPlaceCategory"
-                               class="right carousel-control carouselCategory"></a>
-                        </div><!--.Carousel-->
 
-                    </div>
+                                                <div class="item">
+                                                    <div class="row">
+
+                                            @endif
+
+                                                @endforeach
+
+                                                    </div>
+
+                                                </div>
+
+
+
+                                            </div><!--.carousel-inner-->
+                                            <a data-slide="prev" href="#Carousel{{$key}}"
+                                            class="left carousel-control carouselCategory"></a>
+                                            <a data-slide="next" href="#Carousel{{$key}}"
+                                            class="right carousel-control carouselCategory"></a>
+                                </div><!--.Carousel-->
+
+                            </div>
+                        </div>
+                    </div><!--.container-->
                 </div>
-            </div><!--.container-->
-        </div>
-    </section>
-
-
-    <section class="place-category">
-
-        <div class="container">
-            <div class="row place-category-header text-center">
-
-                <h3>Category Name2</h3>
-
-            </div>
-        </div>
-
-        <div class="place-body">
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div id="CarouselPlaceCategory2" class="carousel slide">
-
-
-                            <!-- Carousel items -->
-                            <div class="carousel-inner carousel-place">
-
-                                <div class="item active">
-                                    <div class="row">
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                    </div><!--.row-->
-                                </div><!--.item-->
-
-                                <div class="item">
-                                    <div class="row">
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                    </div><!--.row-->
-                                </div><!--.item-->
-
-                                <div class="item">
-                                    <div class="row">
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        col-sm-6col-sm-6
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                    </div><!--.row-->
-                                </div><!--.item-->
-
-                            </div><!--.carousel-inner-->
-                            <a data-slide="prev" href="#CarouselPlaceCategory2"
-                               class="left carousel-control carouselCategory"></a>
-                            <a data-slide="next" href="#CarouselPlaceCategory2"
-                               class="right carousel-control carouselCategory"></a>
-                        </div><!--.Carousel-->
-
-                    </div>
-                </div>
-            </div><!--.container-->
-        </div>
-    </section>
-
+        </section>
+    @endforeach
 
     <section class="about_guide_section">
         <div class="about_guide"></div>
         <div class="container">
             <div class="col-md-4">
-                <h3>adsads</h3>
-                <p>Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                
+                <h3>{{$guide->title}}</h3>
+                <p>{{$guide->description}}
+
                 </p>
             </div>
             <div class="col-md-8">
@@ -672,63 +157,39 @@
 
                     <!-- Wrapper for carousel items -->
                     <div class="carousel-inner guideCarouselInner">
-                        <div class="item active">
-                            <div class="col-md-4 text-center">
-                                <img src="/images/1.jpg" alt="..." class="img-circle"
-                                     style="width: 70%; height:150px ">
-                            </div>
-                            <div class="col-md-8">
-                                <h5>name Surnam</h5>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                    when an unknown printer took a galley of type and scrambled it to make a type
-                                    specimen book.</p>
-                                <button type="button" class="btn btn-primary btn-group-sm pull-right"> Information
-                                </button>
 
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="col-md-4 text-center">
-                                <img src="/images/1.jpg" alt="..." class="img-circle"
-                                     style="width: 70%; height:150px ">
-                            </div>
-                            <div class="col-md-8">
-                                <h5>name Surnam</h5>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                    when an unknown printer took a galley of type and scrambled it to make a type
-                                    specimen book.</p>
-                                <button type="button" class="btn btn-primary btn-group-sm pull-right"> Information
-                                </button>
 
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="col-md-4 text-center">
-                                <img src="/images/1.jpg" alt="..." class="img-circle"
-                                     style="width: 70%; height:150px ">
-                            </div>
-                            <div class="col-md-8">
-                                <h5>name Surnam</h5>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                    when an unknown printer took a galley of type and scrambled it to make a type
-                                    specimen book.</p>
-                                <button type="button" class="btn btn-primary btn-group-sm pull-right"> Information
-                                </button>
-                            </div>
-                        </div>
+                        @foreach($usersGuid as $guideUser)
+                            @if($loop->iteration ==1 )
+                            <div class="item active">
+                                @else
+                                    <div class="item ">
+                                @endif
+                                <div class="col-md-4 text-center">
+                                    <img src="/{{$guideUser->images[0]->path}}" alt="..." class="img-circle"
+                                         style="width: 70%; height:150px ">
+                                </div>
+                                <div class="col-md-8">
+                                    <h5>{{$guideUser->name}} {{$guideUser->surname}}</h5>
+                                    <p>{{$guideUser->user_translates[0]->description}}</p>
+                                    <button type="button" class="btn btn-primary btn-group-sm pull-right"> Information
+                                    </button>
+
+                                </div>
+                                    </div>
+
+
+                        @endforeach
                     </div>
                     <!-- Carousel controls -->
                     <div class="col-md-12 guideCarouselIconse">
-                            <a class="carousel-control left guideCarouselIcone" href="#guideCarousel" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-left"></span>
-                            </a>
+                        <a class="carousel-control left guideCarouselIcone" href="#guideCarousel" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
 
-                            <a class="carousel-control right guideCarouselIcone" href="#guideCarousel" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
-                            </a>
+                        <a class="carousel-control right guideCarouselIcone" href="#guideCarousel" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
 
 
                     </div>
@@ -745,7 +206,7 @@
                     <select class="form-control" name="catgorySelect" id="catgorySelect">
                         <option>All</option>
                         @foreach($category as $cat)
-                        <option>{{$cat->category_translates[0]->name}}</option>
+                            <option>{{$cat->category_translates[0]->name}}</option>
                         @endforeach
 
                     </select>
@@ -1104,161 +565,161 @@
                             </div><!--.item-->
 
 
-                            <div class="item">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>12
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
+                            {{--<div class="item">--}}
+                                {{--<div class="container-fluid">--}}
+                                    {{--<div class="row">--}}
+                                        {{--<div class="col-md-3 col-sm-6 col-xs-12">--}}
+                                            {{--<figure class="imghvr-shutter-in-out-diag-2">--}}
+                                                {{--<img src="https://placeimg.com/300/300/people"--}}
+                                                     {{--class="img-responsive">--}}
+                                                {{--<figcaption>--}}
+                                                    {{--<h1>Hello world</h1>--}}
+                                                    {{--<div class="btn-group">--}}
+                                                        {{--<button type="button" class="btn btn-info">View</button>--}}
+                                                    {{--</div>--}}
+                                                {{--</figcaption>--}}
+                                            {{--</figure>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="col-md-3 col-sm-6 col-xs-12">--}}
+                                            {{--<figure class="imghvr-shutter-in-out-diag-2">--}}
+                                                {{--<img src="https://placeimg.com/300/300/people"--}}
+                                                     {{--class="img-responsive">--}}
+                                                {{--<figcaption>12--}}
+                                                    {{--<h1>Hello world</h1>--}}
+                                                    {{--<div class="btn-group">--}}
+                                                        {{--<button type="button" class="btn btn-info">View</button>--}}
+                                                    {{--</div>--}}
+                                                {{--</figcaption>--}}
+                                            {{--</figure>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="col-md-3 col-sm-6 col-xs-12">--}}
+                                            {{--<figure class="imghvr-shutter-in-out-diag-2">--}}
+                                                {{--<img src="https://placeimg.com/300/300/people"--}}
+                                                     {{--class="img-responsive">--}}
+                                                {{--<figcaption>--}}
+                                                    {{--<h1>Hello world</h1>--}}
+                                                    {{--<div class="btn-group">--}}
+                                                        {{--<button type="button" class="btn btn-info">View</button>--}}
+                                                    {{--</div>--}}
+                                                {{--</figcaption>--}}
+                                            {{--</figure>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="col-md-3 col-sm-6 col-xs-12">--}}
+                                            {{--<figure class="imghvr-shutter-in-out-diag-2">--}}
+                                                {{--<img src="https://placeimg.com/300/300/people"--}}
+                                                     {{--class="img-responsive">--}}
+                                                {{--<figcaption>--}}
+                                                    {{--<h1>Hello world</h1>--}}
+                                                    {{--<div class="btn-group">--}}
+                                                        {{--<button type="button" class="btn btn-info">View</button>--}}
+                                                    {{--</div>--}}
+                                                {{--</figcaption>--}}
+                                            {{--</figure>--}}
+                                        {{--</div>--}}
 
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
+                                        {{--<div class="col-md-3 col-sm-6 col-xs-12">--}}
+                                            {{--<figure class="imghvr-shutter-in-out-diag-2">--}}
+                                                {{--<img src="https://placeimg.com/300/300/people"--}}
+                                                     {{--class="img-responsive">--}}
+                                                {{--<figcaption>--}}
+                                                    {{--<h1>Hello world</h1>--}}
+                                                    {{--<div class="btn-group">--}}
+                                                        {{--<button type="button" class="btn btn-info">View</button>--}}
+                                                    {{--</div>--}}
+                                                {{--</figcaption>--}}
+                                            {{--</figure>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="col-md-3 col-sm-6 col-xs-12">--}}
+                                            {{--<figure class="imghvr-shutter-in-out-diag-2">--}}
+                                                {{--<img src="https://placeimg.com/300/300/people"--}}
+                                                     {{--class="img-responsive">--}}
+                                                {{--<figcaption>--}}
+                                                    {{--<h1>Hello world</h1>--}}
+                                                    {{--<div class="btn-group">--}}
+                                                        {{--<button type="button" class="btn btn-info">View</button>--}}
+                                                    {{--</div>--}}
+                                                {{--</figcaption>--}}
+                                            {{--</figure>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="col-md-3 col-sm-6 col-xs-12">--}}
+                                            {{--<figure class="imghvr-shutter-in-out-diag-2">--}}
+                                                {{--<img src="https://placeimg.com/300/300/people"--}}
+                                                     {{--class="img-responsive">--}}
+                                                {{--<figcaption>--}}
+                                                    {{--<h1>Hello world</h1>--}}
+                                                    {{--<div class="btn-group">--}}
+                                                        {{--<button type="button" class="btn btn-info">View</button>--}}
+                                                    {{--</div>--}}
+                                                {{--</figcaption>--}}
+                                            {{--</figure>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="col-md-3 col-sm-6 col-xs-12">--}}
+                                            {{--<figure class="imghvr-shutter-in-out-diag-2">--}}
+                                                {{--<img src="https://placeimg.com/300/300/people"--}}
+                                                     {{--class="img-responsive">--}}
+                                                {{--<figcaption>--}}
+                                                    {{--<h1>Hello world</h1>--}}
+                                                    {{--<div class="btn-group">--}}
+                                                        {{--<button type="button" class="btn btn-info">View</button>--}}
+                                                    {{--</div>--}}
+                                                {{--</figcaption>--}}
+                                            {{--</figure>--}}
+                                        {{--</div>--}}
 
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 col-xs-12">
-                                            <figure class="imghvr-shutter-in-out-diag-2">
-                                                <img src="https://placeimg.com/300/300/people"
-                                                     class="img-responsive">
-                                                <figcaption>
-                                                    <h1>Hello world</h1>
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info">View</button>
-                                                    </div>
-                                                </figcaption>
-                                            </figure>
-                                        </div>
+                                        {{--<div class="col-md-3 col-sm-6 col-xs-12">--}}
+                                            {{--<figure class="imghvr-shutter-in-out-diag-2">--}}
+                                                {{--<img src="https://placeimg.com/300/300/people"--}}
+                                                     {{--class="img-responsive">--}}
+                                                {{--<figcaption>--}}
+                                                    {{--<h1>Hello world</h1>--}}
+                                                    {{--<div class="btn-group">--}}
+                                                        {{--<button type="button" class="btn btn-info">View</button>--}}
+                                                    {{--</div>--}}
+                                                {{--</figcaption>--}}
+                                            {{--</figure>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="col-md-3 col-sm-6 col-xs-12">--}}
+                                            {{--<figure class="imghvr-shutter-in-out-diag-2">--}}
+                                                {{--<img src="https://placeimg.com/300/300/people"--}}
+                                                     {{--class="img-responsive">--}}
+                                                {{--<figcaption>--}}
+                                                    {{--<h1>Hello world</h1>--}}
+                                                    {{--<div class="btn-group">--}}
+                                                        {{--<button type="button" class="btn btn-info">View</button>--}}
+                                                    {{--</div>--}}
+                                                {{--</figcaption>--}}
+                                            {{--</figure>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="col-md-3 col-sm-6 col-xs-12">--}}
+                                            {{--<figure class="imghvr-shutter-in-out-diag-2">--}}
+                                                {{--<img src="https://placeimg.com/300/300/people"--}}
+                                                     {{--class="img-responsive">--}}
+                                                {{--<figcaption>--}}
+                                                    {{--<h1>Hello world</h1>--}}
+                                                    {{--<div class="btn-group">--}}
+                                                        {{--<button type="button" class="btn btn-info">View</button>--}}
+                                                    {{--</div>--}}
+                                                {{--</figcaption>--}}
+                                            {{--</figure>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="col-md-3 col-sm-6 col-xs-12">--}}
+                                            {{--<figure class="imghvr-shutter-in-out-diag-2">--}}
+                                                {{--<img src="https://placeimg.com/300/300/people"--}}
+                                                     {{--class="img-responsive">--}}
+                                                {{--<figcaption>--}}
+                                                    {{--<h1>Hello world</h1>--}}
+                                                    {{--<div class="btn-group">--}}
+                                                        {{--<button type="button" class="btn btn-info">View</button>--}}
+                                                    {{--</div>--}}
+                                                {{--</figcaption>--}}
+                                            {{--</figure>--}}
+                                        {{--</div>--}}
 
 
-                                    </div><!--.row-->
-                                </div>
+                                    {{--</div><!--.row-->--}}
+                                {{--</div>--}}
 
-                            </div><!--.item-->
+                            {{--</div><!--.item-->--}}
 
 
                         </div><!--.carousel-inner-->

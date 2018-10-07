@@ -31,6 +31,19 @@ Route::group(['middleware' => ['role']], function () {
     Route::resource('/admin/userControl', 'UsersController');
     Route::resource('/admin/blogCrud', 'BlogController');
     Route::resource('/admin/menuCrud', 'MenuController');
+    Route::get('/admin/buttons', 'InfoController@buttons')->name('buttons');
+    Route::get('/admin/buttons/{id}', 'InfoController@buttonEdit')->name('buttonEdit');
+    Route::put('buttonsUpdate/{id}', 'InfoController@buttonUpdate')->name('buttonUpdate');
+
+
+    Route::get('/admin/aboutCrud', 'InfoController@about')->name('about');
+    Route::post('aboutStore', 'InfoController@storeAbout')->name('aboutStore');
+    Route::put('aboutUpdate/{id}', 'InfoController@updateAbout')->name('updateAbout');
+
+
+    Route::post('guideStore', 'InfoController@storeGuide')->name('storeGuide');
+    Route::put('guideUpdate/{id}', 'InfoController@updateGuide')->name('guideUpdate');
+    Route::get('/admin/guideCrud', 'InfoController@guide')->name('guide');
     Route::resource('/admin/categoryCrud', 'CategoryController');
 });
 
