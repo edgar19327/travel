@@ -15,12 +15,14 @@ use App\Models\UserTranslate;
 use App\User;
 use function foo\func;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class IndexController extends Controller
 {
 
-    public function index()
+    public function index($__category = null, $__state = null)
     {
+
         $languageActiv = Language::where('status', 1)->get();
         $languageID = $languageActiv[0]->id;
         $lang = Language::all();
@@ -60,40 +62,64 @@ class IndexController extends Controller
         }])->whereHas('role', function($role){
                 $role->where('name','guide');})->get();
 
-//            UserTranslate::where('language_id', $languageID)->with(['user' =>function($guide){
-//            $guide->with('images');
-//            $guide->whereHas('role' , function($role){
-//                $role->where('name','guide');
-//            });
-//        }])->get();
-
-
-//            User::with(['role' => function($role){
-//            $role->where('name',"guide");
-//        }])->whereHas('role', function($roleEE){
-//            $roleEE->where('name',"guide");
-//        })->get();
-
-
-//            UserTranslate::where('language_id', $languageID)->with(['user' =>function($guide){
-//            $guide->with('images');
-//            $guide->with(['role' => function($role){
-//                $role->where('name','guide');
-//            }]);
-//        }])->get();
         $categoryArray = [];
         foreach ($categoryPlace as $datePlace) {
             $categoryArray[$datePlace->category->category_translates[0]->name][] = $datePlace->place;
         }
 
+        $placeALl = Place::with(['place_translates' => function ($placeLang) use($languageID){
+            $placeLang->where('language_id', $languageID);
+        }])->with(['images' =>function($placeMain){
+            $placeMain->where('type', 0 );
+        }])->paginate(30);
+
+        if (session()->exists('hhh')){
+            session()->remove('hhh');
+        }
+
+        if($__category || $__state) {
+            if ($__category === "All" ){
+
+                $placeALl = Place::whereHas('state',   function($stateSelect) use($__state){
+                    $stateSelect->where('state_id',  $__state);
+                })->with(['place_translates' => function ($placeLang) use($languageID){
+                $placeLang->where('language_id', $languageID);
+            }])->with(['images' =>function($placeMain){
+                $placeMain->where('type', 0 );
+            }])->paginate(30);
+                return response()->json(['html' => View::make('/placeSlider', ['placeALl' =>$placeALl])->render()], 200);
+
+            }elseif($__state === "All" ){
+                $placeALl = CategoryPlace::where('category_id', $__category)->with(['place'=> function($placeDateCat) use($languageID){
+                    $placeDateCat->with(['images' =>function($placeCateMain){
+                        $placeCateMain->where('type', 0 );
+                    }]);
+                    $placeDateCat->with(['place_translates'=>function($placeCatLang) use($languageID){
+                        $placeCatLang->where('language_id',$languageID);
+                    }]);
+                }])->get();
+                return response()->json(['html' => View::make('/placeSlider', ['placeALl' =>$placeALl])->render()], 200);
+
+            }elseif($__state !== "All" && $__category !== "All"){
+                $placeALl =  CategoryPlace::where('category_id', $__category)->whereHas('place',  function($placeDateCat) use($languageID, $__state ){
+                    $placeDateCat->where('state_id',$__state);
+                    $placeDateCat->whereHas('images' ,function($placeCateMain){
+                        $placeCateMain->where('type', 0 );
+                    });
+                    $placeDateCat->with(['place_translates'=>function($placeCatLang) use($languageID){
+                        $placeCatLang->where('language_id',$languageID);
+                    }]);
+                })->get();
+                return response()->json(['html' => View::make('/placeSlider', ['placeALl' =>$placeALl])->render()], 200);
+            }
+
+            session()->put('hhh', ['category'=>$__category, 'state'=>$__state]);
+        }
+
+
         return view('test', ['lang' => $lang, 'menu' => $menu, 'slider' => $slider,
             'states' => $states, 'category' => $category,
-            'about' => $about, 'guide'=>$guide,'categoryArray' => $categoryArray, 'usersGuid' => $usersGuid ]);
+            'about' => $about, 'guide'=>$guide,'categoryArray' => $categoryArray, 'usersGuid' => $usersGuid, 'placeALl' =>$placeALl, ]);
     }
-//    public function men()
-//    {
-//        $lop=['home','about','content','soledat'];
-//        return view('layouts.app', ['lop'=> $lop] );
-//    }
 
 }

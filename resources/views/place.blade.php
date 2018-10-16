@@ -6,17 +6,21 @@
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner ">
-                <div class="item carouseltem active" id="carouseltem">
-                    <img src="img/php4943.tmp1534841378.jpeg" alt="Los Angeles" style="width:100%; height: 100vh;">
-                </div>
+                @foreach($place[0]->images as $images)
+                    @if($images->type === 0)
+                        <div class="item carouseltem active" id="carouseltem">
+                        <img src="/{{$images->path}}" alt="Los Angeles" style="width:100%; height: 100vh;">
+                        </div>
+                        @else
+                        <div class="item carouseltem">
+                        <img src="/{{$images->path}}" alt="Chicago" style=" width:100%; height: 100vh;">
+                        </div>
+@endif
+                @endforeach
 
-                <div class="item carouseltem">
-                    <img src="img/php4943.tmp1534841378.jpeg" alt="Chicago" style=" width:100%; height: 100vh;">
-                </div>
 
-                <div class="item carouseltem">
-                    <img src="img/php4943.tmp1534841378.jpeg" alt="New york" style=" width:100%; height: 100vh;">
-                </div>
+
+
                 <div class="background-carusel"></div>
             </div>
 
@@ -35,7 +39,7 @@
         <div class="container-fluid">
         <div class="row">
 <div class="col-md-4 ">
-            <h4>Description</h4>
+            <h4>{{$place[0]->place_translates[0]->title}}</h4>
 </div>
             <div class="col-md-8 text-right ratingBlock">
                 <span class="fa fa-star checked"></span>
@@ -45,13 +49,8 @@
                 <span class="fa fa-star"></span>
             </div>
             <div class="col-md-12 place_desc">
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                    when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                    It has survived not only five centuries, but also the leap into electronic typesetting, remaining
-                    essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                    containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
-                    PageMaker including versions of Lorem Ipsum.</p>
+
+                <p>{{$place[0]->place_translates[0]->description}}</p>
             </div>
 
 
@@ -62,7 +61,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1745.1383148319076!2d43.84146598725721!3d40.784850703011074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4041fb8b00fddc81%3A0xc2cb0f874c517e92!2sVardanants+statue!5e0!3m2!1sru!2s!4v1536651865556"
+                    <iframe src="{{$place[0]->location}}"
                             width="100%" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
 
                 </div>
@@ -71,36 +70,45 @@
 
     </section>
     <footer class="footer">
-        <div class="container ">
+        <div class="container-fluid ">
             <div class="row">
                 <div class="col-md-4">
-                    <h3>More About Company</h3>
-                    <p> Nemo enim ipsam voluptatem quia
-                        voluptas sit aspernatur aut odit aut fugit,
-                        sed quia consequuntur magni dolores eos qui
-                        ratione voluptatem sequi nesciunt.</p>
-                    <p class="adam">- Patrick Victoria, CEO</p>
+                    <div class="footer_about">
+                        <h3 class="text-center">{{$about->title}}
+                        </h3>
+                        <p> {{$about->description}}
+                            .</p>
+                    </div>
                 </div>
-                <div class="col-md-4 content_block">
-                    <h4 class="text-center">Content</h4>
-                    <ul>
-                        <li>Home</li>
-                        <li>About</li>
-                        <li>About</li>
-                        <li>About</li>
-                        {{--<li><a href="mailto:info@example.com">contact@example.com</a> </li>--}}
-                    </ul>
+                <div class="col-md-2"></div>
+
+                <div class="col-md-6">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4031.7583359838804!2d43.831458428437884!3d40.79707163131329!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4041fc89f480e665%3A0xd91ab7dfb29390d!2sArmenia+Erevan!5e0!3m2!1sru!2s!4v1537447392816"
+                            width="100%" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
                 </div>
-                <div class="col-md-4 content_block">
-                    <h4 class="text-center">Contact Info</h4>
-                    <ul>
-                        <li>The company name</li>
-                        <li>1234567890</li>
-                        <li><a href="mailto:info@example.com">contact@example.com</a></li>
-                    </ul>
-                </div>
+
             </div>
         </div>
     </footer>
+<script>
+    if ($('#myCarousel')) {
+        console.log($('nav'));
 
+        setTimeout(function () {
+            $('nav').attr('hidden', 'hidden');
+
+        }, 1)
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 100) {
+                $('nav').attr('hidden', false)
+            } else {
+                $('nav').attr('hidden', true)
+
+            }
+        });
+
+    } else {
+
+    }
+</script>
 @endsection

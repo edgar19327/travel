@@ -31,87 +31,91 @@
 </head>
 <body>
 <div id="app">
-    {{--<nav class="navbar  navbar-inverse navbar-fixed-top">--}}
-        {{--<div class="container">--}}
-            {{--<div class="navbar-header">--}}
-                {{--<button type="button" class="navbar-toggle  collapsed" data-toggle="collapse" data-target="#navbar"--}}
-                        {{--aria-expanded="false" aria-controls="navbar">--}}
-                    {{--<span class="sr-only">Toggle navigation</span>--}}
-                    {{--<span class="icon-bar"></span>--}}
-                    {{--<span class="icon-bar"></span>--}}
-                    {{--<span class="icon-bar"></span>--}}
-                {{--</button>--}}
-                {{--<a class="navbar-brand ">Travel</a>--}}
-            {{--</div>--}}
-            {{--<div id="navbar" class="navbar-collapse  ">--}}
-
-                {{--<ul class="nav navbar-nav navbar-center ">--}}
-                    {{--@foreach($menu as $param)--}}
-                        {{--<li><a href="{{$param->menu_parents[0]->url}}">{{$param->menu_parents[0]->name}}</a></li>--}}
 
 
-                    {{--@endforeach--}}
+    <nav class="navbar  navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle  collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand ">Travel</a>
+            </div>
+            <div id="navbar" class="navbar-collapse  ">
 
-                {{--</ul>--}}
+                <ul class="nav navbar-nav navbar-center ">
+                    @foreach($menu as $param)
+                        <li><a href="{{$param->menu_parents[0]->url}}">{{$param->menu_parents[0]->name}}</a></li>
 
 
-                {{--<ul class="nav navbar-nav navbar-right">--}}
+                    @endforeach
 
-                    {{--@guest--}}
-                        {{--<li class="nav-item">--}}
-                            {{--<a class="nav-link" href="{{ route('login') }}">{{ __('Log In') }}</a>--}}
-                        {{--</li>--}}
+                </ul>
 
-                {{--</ul>--}}
 
-                {{--<form onsubmit="changeLanguage(this)" action="{{route('language')}}" method="Post">--}}
-                    {{--<div class="col-sm-1 pull-right">--}}
-                        {{--<select onchange="$(this).parent().parent().submit();" class="form-control" name="languageSelect" id="languageSelect" >--}}
-                            {{--@foreach($lang as $language)--}}
-                                    {{--<option  value="{{$language->id}}" {{ $language->status == 1 ? 'selected' : '' }}>{{$language->translation}}</option>--}}
-                            {{--@endforeach--}}
-                        {{--</select>--}}
 
-                    {{--</div>--}}
-                {{--</form>--}}
+                    @guest
+                    <ul class="nav navbar-nav navbar-right">
 
-                {{--@else--}}
-                    {{--<form onsubmit="changeLanguage(this)" action="{{route('language')}}" method="Post">--}}
-                        {{--<div class="col-sm-1 pull-right">--}}
-                            {{--<select onchange="$(this).parent().parent().submit();" class="form-control" name="languageSelect" id="languageSelect" >--}}
-                                {{--@foreach($lang as $language)--}}
-                                    {{--<option  value="{{$language->id}}" {{ $language->status == 1 ? 'selected' : '' }}>{{$language->translation}}</option>--}}
-                                {{--@endforeach--}}
-                            {{--</select>--}}
+                    <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Log In') }}</a>
+                        </li>
 
-                        {{--</div>--}}
-                    {{--</form>--}}
-                    {{--<ul class="nav navbar-nav navbar-right">--}}
-                        {{--<li class="nav-item dropdown">--}}
-                            {{--<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"--}}
-                               {{--data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
-                                {{--{{ Auth::user()->name }} <span class="caret"></span>--}}
-                            {{--</a>--}}
+                </ul>
 
-                            {{--<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">--}}
-                                {{--<a class="dropdown-item" href="{{ route('logout') }}"--}}
-                                   {{--onclick="event.preventDefault();--}}
-                                                     {{--document.getElementById('logout-form').submit();">--}}
-                                    {{--{{ __('Logout') }}--}}
-                                {{--</a>--}}
+                <form onsubmit="changeLanguage(this)" action="{{route('language')}}" method="Post">
+                    <div class="col-sm-1 pull-right">
+                        <select onchange="$(this).parent().parent().submit();" class="form-control" name="languageSelect" id="languageSelect" >
+                            @foreach($lang as $language)
+                                    <option  value="{{$language->id}}" {{ $language->status == 1 ? 'selected' : '' }}>{{$language->translation}}</option>
+                            @endforeach
+                        </select>
 
-                                {{--<form id="logout-form" action="{{ route('logout') }}" method="POST"--}}
-                                      {{--style="display: none;">--}}
-                                    {{--@csrf--}}
-                                {{--</form>--}}
-                            {{--</div>--}}
-                        {{--</li>--}}
-                        {{--@endguest--}}
-                    {{--</ul>--}}
+                    </div>
+                </form>
 
-            {{--</div><!--/.nav-collapse -->--}}
-        {{--</div>--}}
-    {{--</nav>--}}
+                @else
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                      style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                    <form onsubmit="changeLanguage(this)" action="{{route('language')}}" method="Post">
+                        <div class="col-sm-1 pull-right ">
+                            <select onchange="$(this).parent().parent().submit();" class="form-control" name="languageSelect" id="languageSelect" >
+                                @foreach($lang as $language)
+                                    <option  value="{{$language->id}}" {{ $language->status == 1 ? 'selected' : '' }}>{{$language->translation}}</option>
+                                @endforeach
+                            </select>
+
+                        </div>
+                    </form>
+                @endguest
+
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
 
 
     <main class="py-4">

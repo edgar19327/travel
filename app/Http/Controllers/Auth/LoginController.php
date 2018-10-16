@@ -32,16 +32,18 @@ class LoginController extends Controller
      * @return void
      */
 
-    public function authenticated(Request $request, $user) {
+    public function authenticated(Request $request, $user)
+    {
 
-$user_role = $user->role_id;
-if ($user_role == 3){
-    return redirect('/admin/index');
-}else{
-    return redirect('/home');
-}
+        $user_role = $user->role_id;
+        if ($user_role == 3) {
+            return redirect('/admin-panel/index');
+        } else {
+            return redirect('/');
+        }
 
     }
+
     public function __construct()
     {
 

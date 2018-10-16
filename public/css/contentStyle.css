@@ -265,12 +265,29 @@ margin-left: 5%;
 [class^='imghvr-']:after, [class*=' imghvr-']:before, [class*=' imghvr-']:after,
 [class^='imghvr-'] *, [class*=' imghvr-'] *, [class^='imghvr-'] *:before,
 [class^='imghvr-'] *:after, [class*=' imghvr-'] *:before, [class*=' imghvr-'] *:after {
+    width: 100%;
     box-sizing: border-box;
     -webkit-transition: all 0.35s ease;
     -moz-transition: all 0.35s ease;
     transition: all 0.35s ease;
 }
-
+/*dropdowns*/
+.dropdown-item{
+    display: block;
+    width: 100%;
+    padding: .25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+/*.dropdown-item:focus, .dropdown-item:hover {*/
+    /*text-decoration: none;*/
+    /*background-color: transparent;*/
+/*}*/
 /* imghvr-fade-*
    ----------------------------- */
 [class^='imghvr-fade'] figcaption, [class*=' imghvr-fade'] figcaption {
