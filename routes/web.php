@@ -18,7 +18,8 @@ Route::post('/language', 'MultiLanguage@language')->name('language');
 
 Auth::routes();
 
-
+Route::get('profile/{id}', 'ProfileController@views')->name('profileView');
+Route::get('guide/{id}', 'ProfileController@guideView')->name('guideView');
 Route::get('/views/place/{id}', 'ShowPlaceController@index' )->name('placeView');
 Route::group(['prefix' => 'admin-panel'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
@@ -49,5 +50,6 @@ Route::group(['prefix' => 'admin-panel'], function () {
     Route::post('guideStore', 'InfoController@storeGuide')->name('storeGuide');
     Route::put('guideUpdate/{id}', 'InfoController@updateGuide')->name('guideUpdate');
 });
+Route::put('profileUpdate/{id}', 'ProfileController@update')->name('profileUpdate');
 
 Route::get('/{category?}/{state?}', 'IndexController@index' )->name('index');

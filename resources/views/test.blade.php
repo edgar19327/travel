@@ -3,7 +3,7 @@
     {{--{{$slider}}--}}
 
     <header>
-        <div id="myCarousel" class="carousel_slide" data-ride="carousel">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
 
             <ol class="carousel-indicators">
@@ -174,17 +174,20 @@
                                     @else
                                         <div class="item ">
                                             @endif
+
                                             <div class="col-md-4 text-center">
                                                 <img src="/{{$guideUser->images[0]->path}}" alt="..." class="img-circle"
                                                      style="width: 80%; height:150px ">
                                             </div>
                                             <div class="col-md-8">
+                                                <form action="{{route('guideView', $guideUser->id )}}"
+                                                      method="Get" >
                                                 <h5>{{$guideUser->name}} {{$guideUser->surname}}</h5>
                                                 <p>{{$guideUser->user_translates[0]->description}}</p>
-                                                <button type="button" class="btn btn-primary btn-group-sm pull-right">
+                                                <button type="submit" class="btn btn-primary btn-group-sm pull-right">
                                                     Information
                                                 </button>
-
+                                                </form>
                                             </div>
                                         </div>
 

@@ -114,7 +114,7 @@
 
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-default " id="createPlaceMod">Create</button>
+                        <button type="submit" class="btn btn-default " id="createPlaceMod">Save</button>
 
                         <button type="button" class="btn btn-default" data-dismiss="modal"
                                 onclick="$('.modal-backdrop').remove(); $('#editModalPlace').remove();">Close

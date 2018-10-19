@@ -167,11 +167,12 @@ class UsersController extends Controller
         ],$messages);
 
         if ($validator->fails()){
-            return redirect('/admin/userControl')
+            return redirect('/admin-panel/userControl')
                 ->withInput()
                 ->withErrors($validator);
         }else {
-            $user = User::findOrFail($id);
+            $user = User::where('id',$id)->first();
+
             $user->name = $request->get('name_user');
             $user->surname = $request->get('surname_user');
             $user->numbere = $request->get('phone_user');
@@ -180,10 +181,12 @@ class UsersController extends Controller
                 $user->password = Hash::make($request->get('pass_user'));
 
             }
+
             $user->role_id = $request->get('roleOption');
             if ($user->save()) {
 
-                $descriptions = $request->description_user;
+                $descriptions = $request->get('description_user');
+
                 foreach ($descriptions as $key => $value) {
                     $userTranslate = UserTranslate::findOrFail($key);
                     $userTranslate->description = $value;
