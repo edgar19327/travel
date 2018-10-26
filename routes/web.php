@@ -22,7 +22,6 @@ Route::get('profile/{id}', 'ProfileController@views')->name('profileView');
 Route::get('guide/{id}', 'ProfileController@guideView')->name('guideView');
 Route::get('/views/place/{id}', 'ShowPlaceController@index' )->name('placeView');
 Route::group(['prefix' => 'admin-panel'], function () {
-    Route::get('/home', 'HomeController@index')->name('home');
     Route::group(['middleware' => ['role']], function () {
     Route::get('index', 'AdminController@index')->name('admin_page');
     Route::resource('state', 'StateController');
@@ -33,6 +32,7 @@ Route::group(['prefix' => 'admin-panel'], function () {
     Route::resource('blogCrud', 'BlogController');
     Route::resource('menuCrud', 'MenuController');
     Route::get('buttons', 'InfoController@buttons')->name('buttons');
+    Route::get('desc', 'UsersController@guideSettings')->name('desc');
     Route::get('buttons/{id}', 'InfoController@buttonEdit')->name('buttonEdit');
 
 

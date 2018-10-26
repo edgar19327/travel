@@ -83,4 +83,9 @@ class User extends Authenticatable
 	{
 		return $this->hasMany(\App\Models\UserTranslate::class);
 	}
+
+    public function works_guides()
+    {
+        return $this->hasMany(\App\Models\WorksGuide::class);
+    }
 }

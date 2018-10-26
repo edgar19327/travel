@@ -7,6 +7,7 @@ use App\Models\Language;
 use App\Models\Menu;
 use App\Models\UserTranslate;
 use App\User;
+use function foo\func;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
@@ -48,11 +49,18 @@ class ProfileController extends Controller
         $menu = Menu::with(['menu_parents' => function ($date) use ($languageID) {
             $date->where('translate_id', $languageID);
         }])->get();
-        $guide = User::where('id', $id)->with('images')->with(['user_translates' => function ($userTranslate)use($languageID) {
+        $guide = User::where('id', $id)->with('images')->with(['works_guides'=>function($works_guides)use ($languageID){
+            $works_guides->with(['state' => function($stateWorks)use ($languageID){
+                $stateWorks->with(['state_translates' =>function($state_translates)use ($languageID){
+                    $state_translates ->where('language_id',$languageID );
+                }]);
+            }]);
+
+        }])->with(['user_translates' => function ($userTranslate)use($languageID) {
             $userTranslate->where('language_id',$languageID);
         }])->get();
 //        return $id;
-
+//return$guide;
 
         return view('/guide', [ 'guide'=>$guide,'menu' => $menu, 'lang'=>$lang] );
     }

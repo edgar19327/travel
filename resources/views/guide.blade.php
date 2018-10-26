@@ -14,7 +14,8 @@
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <figure class="centered">
                                             <img class="img-circle img-responsive" alt=""
-                                                 src="/{{$guide[0]->images[0]->path}}" style="width: 180px; height: 180px">
+                                                 src="/{{$guide[0]->images[0]->path}}"
+                                                 style="width: 180px; height: 180px">
                                         </figure>
 
                                     </div>
@@ -22,8 +23,10 @@
                                         <ul class="list-group">
                                             <li class="list-group-item">{{$guide[0]->name}}</li>
                                             <li class="list-group-item">{{$guide[0]->surname}}</li>
-                                            <li class="list-group-item"><i class="fa fa-phone"></i>+{{$guide[0]->numbere}}</li>
-                                            <li class="list-group-item"><i class="fa fa-envelope"></i> {{$guide[0]->email}}
+                                            <li class="list-group-item"><i
+                                                        class="fa fa-phone"></i>+{{$guide[0]->numbere}}</li>
+                                            <li class="list-group-item"><i
+                                                        class="fa fa-envelope"></i> {{$guide[0]->email}}
                                             </li>
                                         </ul>
                                     </div>
@@ -33,7 +36,16 @@
                         <div class="bs-callout bs-callout-danger">
                             <h4>Description</h4>
                             <p>
-                              {{$guide[0]->user_translates[0]->description}}
+                                {{$guide[0]->user_translates[0]->description}}
+
+                            </p>
+                        </div>
+                        <div class="bs-callout bs-callout-danger">
+                            <h4>States</h4>
+                            <p>
+                                @foreach($guide[0]->works_guides as $value)
+                                    {{$value->state->state_translates[0]->name}},
+                                @endforeach
 
                             </p>
                         </div>
@@ -46,4 +58,7 @@
         </div>
         </div>
     </section>
+
+
+
 @endsection

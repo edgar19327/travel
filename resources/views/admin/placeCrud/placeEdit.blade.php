@@ -34,8 +34,7 @@
                                 _Description</label>
                             <div class="col-sm-12">
                                 <textarea class="form-control" name="description[{{$plac->language->id}}]" rows="5"
-                                          id="comment">
-                                    {{$plac->description}}
+                                          id="comment">{{$plac->description}}
 
                                 </textarea>
 
@@ -100,7 +99,6 @@
                         </div>
 
                         <div class="row center-block">
-                            {{$place[0]->images}}
                             @foreach($place[0]->images as $imageAll)
                                 <input type="file" class="col-md-4 center-block"
                                        name="image_{{$imageAll->type}}[{{$imageAll->id}}]"

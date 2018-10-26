@@ -28,7 +28,7 @@
                         <label class="control-label col-sm-4" for="phone_user">Phone:</label>
                         <div class="col-sm-12">
                             <input type="text" name="phone_user" class="form-control" id="phone_user"
-                                   value="{{$user[0]->numbere}}">
+                                   value="+{{$user[0]->numbere}}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -40,26 +40,45 @@
                                    value="{{$user[0]->email}}">
                         </div>
                     </div>
+                    <div class="allSettings">
+                        @if($user[0]->role_id == "4")
+                            @if(sizeof($user[0]->user_translates) !== 0)
+                                @foreach($user[0]->user_translates as $userDesc)
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-6" for="description_user_{{$userDesc->language->id}}">
+                                            {{$userDesc->language->translation}}_Description:
+                                        </label>
+                                        <div class="col-sm-12">
 
-                    @if(sizeof($user[0]->user_translates) == 0)
-
-                        @else
-                        @foreach($user[0]->user_translates as $userDesc)
-                            <div class="form-group">
-                                <label class="control-label col-sm-6" for="description_user_{{$userDesc->id}}">
-                                   {{$userDesc->language->translation}}_Description:
-                                </label>
-                                <div class="col-sm-12">
-
-                        <textarea type="text" name="description_user[{{$userDesc->id}}]" class="form-control"
-                                  id="description_user_{{$userDesc->id}}">
-{{$userDesc->description}}
-
+                        <textarea type="text" name="description_user[{{$userDesc->language->id}}]" class="form-control"
+                                  id="description_user_{{$userDesc->language->id}}">{{$userDesc->description}}
                         </textarea>
-                                </div>
-                            </div>
-                        @endforeach
-                    @endif
+                                        </div>
+                                    </div>
+
+
+                                @endforeach
+                                    @foreach($states as $state)
+
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" name="states[{{$state->id}}]" >{{$state->state_translates[0]->name}}</label>
+                                        </div>
+
+                                    @endforeach
+@else
+
+                                @foreach($states as $state)
+
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" name="states[{{$state->id}}]" >{{$state->state_translates[0]->name}}</label>
+                                    </div>
+
+                                @endforeach
+                            @endif
+                        @else
+
+                        @endif
+                    </div>
 
 
                     <div class="col-sm-12">
@@ -67,15 +86,17 @@
                             <label for="sel1">Select Role:</label>
                             <select class="form-control" name='roleOption' id="sel1">
 
-                                @foreach($role as $roleUser)
+                                @foreach($role as  $roleUser)
+
+
                                     <option id="role[{{$roleUser->id}}]"
+                                            {{ $user[0]->role_id == $roleUser->id ? 'selected' : '' }}
                                             value="{{$roleUser->id }}">{{$roleUser->name}}</option>
                                 @endforeach
                             </select>
 
                         </div>
                     </div>
-
 
 
                     <div class="form-group">
@@ -91,10 +112,11 @@
 
                     <div class="row center-block">
                         <div class="col-lg-offset-2 col-md-4" id="image_upload_4">
-{{--                            <img src="/{{$user[0]->images[0]->path}}" style="width: 100%; height: 200px">--}}
+                            {{--                            <img src="/{{$user[0]->images[0]->path}}" style="width: 100%; height: 200px">--}}
                         </div>
 
-                        <input type="file" class="col-md-4 center-block" name="image4[{{$user[0]->images[0]->id}}]" id="image4">
+                        <input type="file" class="col-md-4 center-block" name="image4[{{$user[0]->images[0]->id}}]"
+                               id="image4">
 
                     </div>
                     <br>
@@ -105,7 +127,7 @@
                         </button>
 
                         <button type="button" class="btn btn-default" data-dismiss="modal"
-                                onclick="$('.modal-backdrop').remove(); $('#createModalUser').remove();">Close
+                                onclick="$('.modal-backdrop').remove(); $('#editModalUser').remove();">Close
                         </button>
                     </div>
 
@@ -115,6 +137,29 @@
     </div>
 </form>
 <script src="{{ asset('js/viewImage.js') }}"></script>
+<script>
+    $('#sel1').change(function () {
+        if ($(this).val() === "4") {
+            $.ajax({
+                type: 'get',
+                url: '{{route('desc')}}',
+                success: function (da) {
+                    $('.allSettings').empty();
+
+                    $('.allSettings').append(da);
+
+
+                }
+            })
+
+
+        } else {
+            $('.allSettings').empty();
+
+        }
+
+    })
+</script>
 
 
 

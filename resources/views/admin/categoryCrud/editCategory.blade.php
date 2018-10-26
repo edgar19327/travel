@@ -8,7 +8,6 @@
                     <h4 class="modal-title">Edit</h4>
                 </div>
                 <div class="modal-body">
-                    {{$editDate}}
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="id_cate">ID:</label>
 
